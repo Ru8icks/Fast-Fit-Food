@@ -23,3 +23,12 @@ app.use('/adunits', adUnitRoutes);
 const server = app.listen(port, function(){
   console.log('Listening on port ' + port);
 });
+
+console.log('No value for FOO yet:', process.env.MYKEY);
+
+if (process.env.NODE_ENV !== 'production') {
+  console.log("dotEnv");
+  require('dotenv').load();
+}
+
+console.log('Now the value for FOO is:', process.env.MYKEY);
