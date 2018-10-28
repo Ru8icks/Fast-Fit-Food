@@ -1,9 +1,12 @@
+
+
 const express = require('express'),
   path = require('path'),
   bodyParser = require('body-parser'),
   cors = require('cors'),
   mongoose = require('mongoose'),
-  config = require('../config/DB');
+  config = require('../config/DB'),
+  unirest = require('unirest');
 
 const app = express();
 
@@ -31,4 +34,3 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').load();
 }
 
-console.log('Now the value for FOO is:', process.env.MYKEY);

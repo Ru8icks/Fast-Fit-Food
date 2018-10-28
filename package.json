@@ -30,6 +30,7 @@
     "ng2-slim-loading-bar": "^4.0.0",
     "rxjs": "^6.0.0",
     "rxjs-compat": "^6.3.3",
+    "unirest": "^0.5.1",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
