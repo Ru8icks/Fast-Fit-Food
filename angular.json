@@ -49,7 +49,7 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/dev.env.ts"
+                  "with": "src/environments/dev.environment.ts"
                 }
               ],
               "optimization": true,
