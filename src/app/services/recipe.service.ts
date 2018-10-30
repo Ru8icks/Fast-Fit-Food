@@ -12,17 +12,6 @@ export class RecipeService {
 
   constructor(private http: HttpClient) { }
 
-  getasIngredient(ing) {
-
-    return this
-      .http
-      .get(`https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/food/ingredients/autocomplete?query=${ing}
-      &number=5&intolerances=egg`,
-        {}).subscribe(res => {
-         return res;
-        }
-      );
-  }
   getIngredient(ing) {
     let headers: HttpHeaders = new HttpHeaders();
     headers = headers.append('X-Mashape-Key', APIKEY);
@@ -49,9 +38,7 @@ export class RecipeService {
 
     return this.http.get(`https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?` +
       `ingredients=${ingredients}&number=5&ranking=1`,
-      {headers}).subscribe(res => {
-        console.log(res);
-    });
+      {headers});
 
 
   }

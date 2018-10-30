@@ -22,6 +22,7 @@ export class CreateComponent implements OnInit {
   ingredients: String[] = new Array<String>();
 
   searchResult;
+  recipesResults;
 
   constructor(private adunitservice: AdunitService, private recipeService: RecipeService, private fb: FormBuilder) {
     this.searchTerm.valueChanges
@@ -47,8 +48,12 @@ export class CreateComponent implements OnInit {
   }
 
   searchForRecipes(ingredients) {
-    this.recipeService.searchForRecipes(this.createSearchString(ingredients));
+    const search = this.createSearchString(ingredients);
+    this.recipeService.searchForRecipes(search).subscribe(response => {
+      this.recipesResults = response;
+    });
   }
+
   private  createSearchString(ingredients ) {
     let searchString = '';
     for (const i of ingredients) {

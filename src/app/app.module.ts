@@ -18,6 +18,9 @@ import { RecipeService } from './services/recipe.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule, MatInputModule, MatSelectModule } from '@angular/material';
+import { RecipesComponent } from './components/recipes/recipes.component';
+
+import {MatCardModule} from '@angular/material/card';
 
 
 @NgModule({
@@ -25,7 +28,8 @@ import { MatAutocompleteModule, MatInputModule, MatSelectModule } from '@angular
     AppComponent,
     CreateComponent,
     IndexComponent,
-    EditComponent
+    EditComponent,
+    RecipesComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +42,7 @@ import { MatAutocompleteModule, MatInputModule, MatSelectModule } from '@angular
     BrowserAnimationsModule,
     FormsModule,
     MatSelectModule,
+    MatCardModule,
   ],
   providers: [
     AdunitService,

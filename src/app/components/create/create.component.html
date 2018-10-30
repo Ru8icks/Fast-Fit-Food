@@ -28,3 +28,6 @@
   </div>
   <button (click)="searchForRecipes(ingredients)"  class="btn btn-primary">Search for Recipes</button>
 </div>
+<app-recipes *ngFor="let recipe of recipesResults" [recipe]="recipe">
+
+</app-recipes>
