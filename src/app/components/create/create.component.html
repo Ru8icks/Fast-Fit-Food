@@ -1,27 +1,30 @@
+
 <div class="card">
   <div class="card-body">
-    <form [formGroup]="angForm" novalidate>
+    <form class="example-form">
       <div class="form-group">
-        <label class="col-md-4">Unit Name</label>
-        <input type="text" class="form-control" name="unit_name" formControlName="unit_name" #unit_name/>
-      </div>
-      <div *ngIf="angForm.controls['unit_name'].invalid && (angForm.controls['unit_name'].dirty || angForm.controls['unit_name'].touched)" class="alert alert-danger">
-        <div *ngIf="angForm.controls['unit_name'].errors.required">
-          Unit Name is required.
+        <mat-form-field class="example-full-width">
+          <input type="text" class="form-control" name="ingredient"  #ingredient  matInput [formControl]="searchTerm" [matAutocomplete]="auto" >
+        </mat-form-field>
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let item of searchResult" [value]="item">
+            {{ item }}
+          </mat-option>
+        </mat-autocomplete>
+        <div class="form-group">
+          <button (click)="addIngredient(ingredient.value)"  class="btn btn-primary">Add Ingredient</button>
         </div>
-      </div>
-      <div class="form-group">
-        <label class="col-md-4">Unit Price</label>
-        <input type="text" class="form-control" name="unit_price" formControlName="unit_price" #unit_price/>
-      </div>
-      <div *ngIf="angForm.controls['unit_price'].invalid && (angForm.controls['unit_price'].dirty || angForm.controls['unit_price'].touched)" class="alert alert-danger">
-        <div *ngIf="angForm.controls['unit_price'].errors.required">
-          Unit Price is required.
-        </div>
-      </div>
-      <div class="form-group">
-        <button (click)="addAdUnit(unit_name.value, unit_price.value)" [disabled]="angForm.pristine || angForm.invalid" class="btn btn-primary">Create Unit</button>
       </div>
     </form>
   </div>
+</div>
+
+<div class="card" *ngIf="ingredients.length>0">
+  <div class="card-body">
+    <h3>Ingredients</h3>
+    <div *ngFor="let item of ingredients" >
+      <h4>{{item}}</h4>
+    </div>
+  </div>
+  <button (click)="searchForRecipes(ingredients)"  class="btn btn-primary">Search for Recipes</button>
 </div>

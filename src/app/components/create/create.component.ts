@@ -3,6 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 import { AdunitService } from '../../services/adunit.service';
 import { RecipeService } from '../../services/recipe.service';
+import { FormControl } from '@angular/forms';
+
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/map';
+import {ArrayLikeObservable} from 'rxjs-compat/observable/ArrayLikeObservable';
 
 
 @Component({
@@ -13,25 +18,43 @@ import { RecipeService } from '../../services/recipe.service';
 export class CreateComponent implements OnInit {
 
   angForm: FormGroup;
+  searchTerm: FormControl = new FormControl();
+  ingredients: String[] = new Array<String>();
+
+  searchResult;
 
   constructor(private adunitservice: AdunitService, private recipeService: RecipeService, private fb: FormBuilder) {
-    this.createForm();
+    this.searchTerm.valueChanges
+      .debounceTime(400)
+      .subscribe(data => {
+        this.recipeService.getIngredient(data).subscribe(response => {
+          console.log(response);
+          this.searchResult = response;
+        });
+      });
+
   }
 
-  createForm() {
-    this.angForm = this.fb.group({
-      unit_name: ['', Validators.required ],
-      unit_price: ['', Validators.required ]
-    });
-  }
 
-  addAdUnit(unit_name, unit_price) {
-    this.adunitservice.addAdUnit(unit_name, unit_price);
-    this.recipeService.getIngredient('apple');
-    this.createForm();
-  }
 
   ngOnInit() {
   }
 
+  addIngredient(ingredient) {
+    console.log(ingredient);
+    this.ingredients.push(ingredient.trim());
+    return;
+  }
+
+  searchForRecipes(ingredients) {
+    this.recipeService.searchForRecipes(this.createSearchString(ingredients));
+  }
+  private  createSearchString(ingredients ) {
+    let searchString = '';
+    for (const i of ingredients) {
+      const searchItem = i.replace(' ', '+');
+      searchString += searchItem + '%2C';
+    }
+    return searchString;
+  }
 }

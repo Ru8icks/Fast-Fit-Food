@@ -12,8 +12,13 @@ import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AdunitService } from './services/adunit.service';
+import { RecipeService } from './services/recipe.service';
 
-import { ReactiveFormsModule } from '@angular/forms';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatAutocompleteModule, MatInputModule, MatSelectModule } from '@angular/material';
+
 
 @NgModule({
   declarations: [
@@ -27,10 +32,17 @@ import { ReactiveFormsModule } from '@angular/forms';
     RouterModule.forRoot(routes),
     SlimLoadingBarModule,
     HttpClientModule,
+    MatInputModule,
     ReactiveFormsModule,
+    MatAutocompleteModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    MatSelectModule,
   ],
   providers: [
     AdunitService,
+    RecipeService,
+
   ],
   bootstrap: [AppComponent]
 })
