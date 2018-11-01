@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-recipes',
@@ -11,7 +12,7 @@ export class RecipesComponent implements OnInit {
   image: String;
   id: number;
 
-  constructor() { }
+  constructor( private router: Router) { }
 
   ngOnInit() {
     console.log(this.recipe);
@@ -20,4 +21,7 @@ export class RecipesComponent implements OnInit {
     this.id = this.recipe.id;
   }
 
+  viewRecipe() {
+    this.router.navigate([`recipe/${this.id}`]);
+  }
 }

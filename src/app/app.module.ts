@@ -21,6 +21,7 @@ import { MatAutocompleteModule, MatInputModule, MatSelectModule } from '@angular
 import { RecipesComponent } from './components/recipes/recipes.component';
 
 import {MatCardModule} from '@angular/material/card';
+import { RecipeComponent } from './components/recipe/recipe.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import {MatCardModule} from '@angular/material/card';
     CreateComponent,
     IndexComponent,
     EditComponent,
-    RecipesComponent
+    RecipesComponent,
+    RecipeComponent
   ],
   imports: [
     BrowserModule,
