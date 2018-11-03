@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { CreateComponent } from './components/create/create.component';
+import { IngredientsComponent } from './components/ingredients/ingredients.component';
 import { IndexComponent } from './components/index/index.component';
 import { EditComponent } from './components/edit/edit.component';
 import {RouterModule} from '@angular/router';
@@ -13,6 +13,9 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AdunitService } from './services/adunit.service';
 import { RecipeService } from './services/recipe.service';
+import { AuthService } from './services/auth.service';
+import { AuthGuard } from './auth/auth.guard';
+
 
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -22,16 +25,18 @@ import { RecipesComponent } from './components/recipes/recipes.component';
 
 import {MatCardModule} from '@angular/material/card';
 import { RecipeComponent } from './components/recipe/recipe.component';
+import { CallbackComponent } from './components/callback/callback.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    CreateComponent,
+    IngredientsComponent,
     IndexComponent,
     EditComponent,
     RecipesComponent,
-    RecipeComponent
+    RecipeComponent,
+    CallbackComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +54,8 @@ import { RecipeComponent } from './components/recipe/recipe.component';
   providers: [
     AdunitService,
     RecipeService,
+    AuthService,
+    AuthGuard,
 
   ],
   bootstrap: [AppComponent]

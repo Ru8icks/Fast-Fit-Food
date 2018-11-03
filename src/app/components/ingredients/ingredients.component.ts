@@ -8,14 +8,15 @@ import { FormControl } from '@angular/forms';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 import {ArrayLikeObservable} from 'rxjs-compat/observable/ArrayLikeObservable';
+import {BehaviorSubject} from 'rxjs';
 
 
 @Component({
   selector: 'app-create',
-  templateUrl: './create.component.html',
-  styleUrls: ['./create.component.css']
+  templateUrl: './ingredients.component.html',
+  styleUrls: ['./ingredients.component.css']
 })
-export class CreateComponent implements OnInit {
+export class IngredientsComponent implements OnInit {
 
   angForm: FormGroup;
   searchTerm: FormControl = new FormControl();
@@ -23,6 +24,8 @@ export class CreateComponent implements OnInit {
 
   searchResult;
   recipesResults;
+
+
 
   constructor(private adunitservice: AdunitService, private recipeService: RecipeService, private fb: FormBuilder) {
     this.searchTerm.valueChanges
@@ -44,6 +47,7 @@ export class CreateComponent implements OnInit {
   addIngredient(ingredient) {
     console.log(ingredient);
     this.ingredients.push(ingredient.trim());
+    this.searchTerm.setValue('');
     return;
   }
 

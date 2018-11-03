@@ -16,6 +16,7 @@ export class RecipeComponent implements OnInit {
   readyInMinutes: number;
   sourceUrl;
   metric = true;
+  dishType: String;
 
   constructor(private recipeService: RecipeService,
               private route: ActivatedRoute) {
@@ -25,18 +26,29 @@ export class RecipeComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.recipeService.getRecipe(params['id']).subscribe(res => {
         console.log(res);
+        // @ts-ignore
         console.log(res.extendedIngredients);
+        // @ts-ignore
         this.ingredients = res.extendedIngredients;
         console.log(this.ingredients);
+        // @ts-ignore
         this.image = res.image;
+        // @ts-ignore
         this.title = res.title;
+        // @ts-ignore
         this.diets = res.diets;
+        // @ts-ignore
         this.sourceUrl = res.sourceUrl;
+        // @ts-ignore
         if (res.analyzedInstructions[0]) {
+          // @ts-ignore
           this.instructions = res.analyzedInstructions[0].steps;
         }
+        // @ts-ignore
         this.readyInMinutes = res.readyInMinutes;
         console.log(this.instructions);
+        // @ts-ignore
+        this.dishType = res.dishTypes;
       });
     });
   }
