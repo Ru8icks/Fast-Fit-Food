@@ -1,3 +1,44 @@
-<p>
-  recipe works!
-</p>
+<div class="container">
+
+
+<div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="{{image}}" alt="Card image cap">
+
+  <div class="card-body">
+    <h6 class="card-title">Ingredients</h6>
+    <ul class="list-group list-group-flush" *ngFor="let ingredient of ingredients">
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        {{ingredient.name}}
+        <span class="badge badge-primary badge-pill">{{ingredient.measures.metric.amount}} {{ingredient.measures.metric.unitShort}}</span>
+      </li>
+    </ul>
+  </div>
+
+
+
+</div>
+
+<div class="jumbotron">
+  <h1 class="display-4">{{title}}</h1>
+  <p class="lead">
+    Ready in {{readyInMinutes}} minutes
+  </p>
+  <div>
+    <span class="badge badge-pill badge-success" *ngFor="let diet of diets" >{{diet}}</span>
+  </div>
+  <hr class="my-4">
+<div *ngIf="instructions">
+  <p *ngFor="let step of instructions">
+    {{step.number}}:
+    {{step.step}}
+  </p>
+</div>
+  <div *ngIf="!instructions">
+    <p>I'm sorry, the instructions seem to be missing. </p>
+    <button class="btn btn-primary" (click)="viewSource()">Visit source</button>
+
+  </div>
+</div>
+
+</div>
+
