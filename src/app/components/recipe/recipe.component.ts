@@ -15,6 +15,7 @@ export class RecipeComponent implements OnInit {
   instructions;
   readyInMinutes: number;
   sourceUrl;
+  metric = true;
 
   constructor(private recipeService: RecipeService,
               private route: ActivatedRoute) {
@@ -43,4 +44,7 @@ export class RecipeComponent implements OnInit {
     window.location.href = this.sourceUrl;
   }
 
+  toggleMetric() {
+    this.metric = !this.metric;
+  }
 }
