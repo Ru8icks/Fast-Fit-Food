@@ -1,10 +1,20 @@
 .container {
   display: flex; /* or inline-flex */
 }
+.container2 {
+  flex-direction:  column;
+  justify-content: space-evenly;
+}
 .jumbotron {
   width: 40vw;
-}
+  margin-bottom: 0rem;
 
+}
+.card {
+  width: 22vw;
+
+
+}
 
 ul,
 li {

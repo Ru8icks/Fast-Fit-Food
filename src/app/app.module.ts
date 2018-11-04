@@ -27,6 +27,7 @@ import {MatCardModule} from '@angular/material/card';
 import { RecipeComponent } from './components/recipe/recipe.component';
 import { CallbackComponent } from './components/callback/callback.component';
 import { WriteReviewComponent } from './components/write-review/write-review.component';
+import { UserReviewsComponent } from './components/user-reviews/user-reviews.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { WriteReviewComponent } from './components/write-review/write-review.com
     RecipesComponent,
     RecipeComponent,
     CallbackComponent,
-    WriteReviewComponent
+    WriteReviewComponent,
+    UserReviewsComponent
   ],
   imports: [
     BrowserModule,

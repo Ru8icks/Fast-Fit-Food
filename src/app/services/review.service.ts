@@ -22,10 +22,11 @@ export class ReviewService {
     this.http.post(`${this.uri}/add`, obj)
       .subscribe(res => console.log('Done'));
   }
-  getReviews() {
+  getReviews(id) {
+    console.log('reviewservicessses')
     return this
       .http
-      .get(`${this.uri}`);
+      .get(`${this.uri}/${id}`);
   }
   editReview(id) {
     return this

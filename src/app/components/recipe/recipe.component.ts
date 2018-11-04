@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {RecipeService} from '../../services/recipe.service';
+import { ReviewService} from '../../services/review.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
@@ -19,9 +20,11 @@ export class RecipeComponent implements OnInit {
   metric = true;
   dishType: String;
   recipeId: number;
+  reviews;
 
   constructor(private recipeService: RecipeService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private reviewService: ReviewService) {
   }
 
   ngOnInit() {
@@ -75,5 +78,14 @@ export class RecipeComponent implements OnInit {
 
   toggleMetric() {
     this.metric = !this.metric;
+  }
+
+  viewReviews() {
+    console.log(this.recipeId)
+    this.reviewService.getReviews(this.recipeId).subscribe(res => {
+      console.log(res);
+      this.reviews = JSON.stringify(res);
+      console.log(this.reviews);
+    });
   }
 }

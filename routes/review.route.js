@@ -23,9 +23,9 @@ reviewRoutes.route('/add').post(function (req, res) {
 });
 
 // Defined get data(index or listing) route
-reviewRoutes.route('/').get(function (req, res) {
-
-  Review.find(function (err, review){
+reviewRoutes.route('/:id').get(function (req, res) {
+  console.log('get',req.params.id);
+  Review.find({recipeId: req.params.id },function (err, review){
     if(err){
       console.log(err);
     }

@@ -1,0 +1,17 @@
+.container {
+  display: flex; /* or inline-flex */
+  flex-direction:  column;
+  justify-content:  space-between;
+  flex-wrap: wrap;
+  align-content: center;
+
+
+
+}
+
+.card {
+  width: 62vw;
+  margin-bottom: 1vh;
+  margin-top:1vh;
+
+}

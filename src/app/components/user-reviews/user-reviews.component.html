@@ -1,0 +1,19 @@
+
+<div class="container">
+<div  *ngFor="let review of reviews">
+
+<div class="card item" >
+  <div class="card-header bg-dark mb-3"><h5 style="color: white">{{review.title}}</h5>
+    <span class="badge badge-warning">{{review.rating}}/10</span></div>
+  <div class="card-body">
+
+
+
+    <p class="card-text">{{review.review}}</p>
+    <p>by: {{review.author}}</p>
+
+  </div>
+</div>
+</div>
+</div>
+

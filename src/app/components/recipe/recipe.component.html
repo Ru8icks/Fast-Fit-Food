@@ -1,7 +1,7 @@
 <div class="container">
 
 
-<div class="card" style="width: 18rem;">
+<div class="card" >
   <img class="card-img-top" src="{{image}}" alt="Card image cap">
 
   <div class="card-body">
@@ -24,7 +24,7 @@
   </div>
   <div class="card-body">
     <a [routerLink]="['/writeReview',recipeId ]" class="btn btn-primary">Write review</a>
-    <a href="#" class="card-link">Another link</a>
+    <button class="btn btn-primary" (click)="viewReviews()">User reviews</button>
   </div>
 
 
@@ -61,4 +61,9 @@
 </div>
 
 </div>
+
+<app-user-reviews *ngIf="reviews" reviewsString={{reviews}}>
+
+</app-user-reviews>
+
 
