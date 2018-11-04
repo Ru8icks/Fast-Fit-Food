@@ -17,13 +17,13 @@
     </ul>
     <input (click)="toggleMetric()" class="tgl tgl-flip" id="cb5" type="checkbox" checked /><label class="tgl-btn" data-tg-off="US" data-tg-on="Metric" for="cb5"></label>
     <div>
-      <h6>Dish type:<p>{{dishType}}</p></h6>
+      <h6>Dish type: {{dishType}}</h6>
 
     </div>
 
   </div>
   <div class="card-body">
-    <a href="#" class="card-link">Card link</a>
+    <a [routerLink]="['/writeReview',recipeId ]" class="btn btn-primary">Write review</a>
     <a href="#" class="card-link">Another link</a>
   </div>
 
@@ -43,12 +43,16 @@
     <span class="badge badge-pill badge-success" *ngFor="let diet of diets" >{{diet}}</span>
   </div>
   <hr class="my-4">
-<div *ngIf="instructions">
-  <p *ngFor="let step of instructions">
+<div *ngIf="instructionsBySteps">
+  <p *ngFor="let step of instructionsBySteps">
     {{step.number}}:
     {{step.step}}
   </p>
 </div>
+  <div *ngIf="instructions">
+    <p>{{instructions}}</p>
+
+  </div>
   <div *ngIf="!instructions">
     <p>I'm sorry, the instructions seem to be missing. </p>
     <button class="btn btn-primary" (click)="viewSource()">Visit source</button>

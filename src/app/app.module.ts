@@ -26,6 +26,7 @@ import { RecipesComponent } from './components/recipes/recipes.component';
 import {MatCardModule} from '@angular/material/card';
 import { RecipeComponent } from './components/recipe/recipe.component';
 import { CallbackComponent } from './components/callback/callback.component';
+import { WriteReviewComponent } from './components/write-review/write-review.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { CallbackComponent } from './components/callback/callback.component';
     EditComponent,
     RecipesComponent,
     RecipeComponent,
-    CallbackComponent
+    CallbackComponent,
+    WriteReviewComponent
   ],
   imports: [
     BrowserModule,

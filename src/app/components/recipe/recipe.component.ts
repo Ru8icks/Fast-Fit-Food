@@ -13,10 +13,12 @@ export class RecipeComponent implements OnInit {
   title: String;
   diets;
   instructions;
+  instructionsBySteps;
   readyInMinutes: number;
   sourceUrl;
   metric = true;
   dishType: String;
+  recipeId: number;
 
   constructor(private recipeService: RecipeService,
               private route: ActivatedRoute) {
@@ -24,6 +26,10 @@ export class RecipeComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
+      this.recipeService.getInstructions(params['id']).subscribe(res => {
+        console.log(res)
+        this.instructionsBySteps = res;
+      });
       this.recipeService.getRecipe(params['id']).subscribe(res => {
         console.log(res);
         // @ts-ignore
@@ -39,16 +45,27 @@ export class RecipeComponent implements OnInit {
         this.diets = res.diets;
         // @ts-ignore
         this.sourceUrl = res.sourceUrl;
-        // @ts-ignore
-        if (res.analyzedInstructions[0]) {
+        console.log(this.instructions);
+        if (!this.instructionsBySteps) {
           // @ts-ignore
-          this.instructions = res.analyzedInstructions[0].steps;
+          if (res.analyzedInstructions.length == 1) {
+            // @ts-ignore
+            console.log(res.analyzedInstructions[0].steps);
+            // @ts-ignore
+            this.instructionsBySteps = res.analyzedInstructions[0].steps;
+            this.instructions = ' ';
+          } else {
+            // @ts-ignore
+            this.instructions = res.instructions;
+          }
         }
         // @ts-ignore
         this.readyInMinutes = res.readyInMinutes;
         console.log(this.instructions);
         // @ts-ignore
         this.dishType = res.dishTypes;
+        // @ts-ignore
+        this.recipeId = res.id;
       });
     });
   }

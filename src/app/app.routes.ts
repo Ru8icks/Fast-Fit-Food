@@ -7,6 +7,7 @@ import {RecipeComponent} from './components/recipe/recipe.component';
 import {CallbackComponent} from './components/callback/callback.component';
 import {NgModule} from '@angular/core';
 import {AuthGuard} from './auth/auth.guard';
+import {WriteReviewComponent} from './components/write-review/write-review.component';
 
 
 export const routes: Routes = [
@@ -44,6 +45,13 @@ export const routes: Routes = [
     canActivate: [
       AuthGuard
     ]
+  },
+  {
+    path: 'writeReview/:id',
+    component: WriteReviewComponent,
+    canActivate: [
+      AuthGuard
+    ]
   }, {
     path: 'callback',
     component: CallbackComponent
@@ -58,3 +66,7 @@ export const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutes { }
+
+
+
+

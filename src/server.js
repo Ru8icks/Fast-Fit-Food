@@ -15,13 +15,16 @@ mongoose.connect(config.DB).then(
   () => {console.log('Database is connected') },
   err => { console.log('Can not connect to the database'+ err)}
 );
-const adUnitRoutes = require('../routes/adunit.route');
+//const adUnitRoutes = require('../routes/adunit.route');
+
+const reviewRoutes = require('../routes/review.route');
 
 app.use(bodyParser.json());
 app.use(cors());
 const port = process.env.PORT || 4000;
 
-app.use('/adunits', adUnitRoutes);
+//app.use('/adunits', adUnitRoutes);
+app.use('/reviews', reviewRoutes);
 
 const server = app.listen(port, function(){
   console.log('Listening on port ' + port);

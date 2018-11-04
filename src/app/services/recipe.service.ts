@@ -51,6 +51,15 @@ export class RecipeService {
       {headers});
 
   }
+  getInstructions(id) {
+    let headers: HttpHeaders = new HttpHeaders();
+    headers = headers.append('X-Mashape-Key', APIKEY);
+    headers = headers.append('X-Mashape-Host', 'spoonacular-recipe-food-nutrition-v1.p.mashape.com');
+
+    return this.http.get(`https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/${id}
+    /analyzedInstructions?stepBreakdown=false`,
+      {headers});
+  }
 }
 
 
