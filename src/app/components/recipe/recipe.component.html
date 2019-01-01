@@ -1,64 +1,76 @@
 <div class="container">
 
 
-<div class="card" >
-  <img class="card-img-top" src="{{image}}" alt="Card image cap">
+  <div class="card" >
+    <img class="card-img-top" src="{{image}}" alt="Card image cap">
 
-  <div class="card-body">
-    <h6 class="card-title">Ingredients </h6>
+    <div class="card-body">
+      <h6 class="card-title">Ingredients </h6>
 
-    <ul class="list-group list-group-flush" >
-      <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let ingredient of ingredients">
-        {{ingredient.name}}
-        <span *ngIf="metric" class="badge badge-primary badge-pill">{{ingredient.measures.metric.amount}} {{ingredient.measures.metric.unitShort}}</span>
-        <span *ngIf="!metric" class="badge badge-primary badge-pill">{{ingredient.measures.us.amount}} {{ingredient.measures.us.unitShort}}</span>
-      </li>
+      <ul class="list-group list-group-flush" >
+        <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let ingredient of ingredients">
+          {{ingredient.name}}
+          <span *ngIf="metric" class="badge badge-primary badge-pill">{{ingredient.measures.metric.amount}} {{ingredient.measures.metric.unitShort}}</span>
+          <span *ngIf="!metric" class="badge badge-primary badge-pill">{{ingredient.measures.us.amount}} {{ingredient.measures.us.unitShort}}</span>
+        </li>
 
-    </ul>
-    <input (click)="toggleMetric()" class="tgl tgl-flip" id="cb5" type="checkbox" checked /><label class="tgl-btn" data-tg-off="US" data-tg-on="Metric" for="cb5"></label>
-    <div>
-      <h6>Dish type: {{dishType}}</h6>
+      </ul>
+      <input (click)="toggleMetric()" class="tgl tgl-flip" id="cb5" type="checkbox" checked /><label class="tgl-btn" data-tg-off="US" data-tg-on="Metric" for="cb5"></label>
+      <div>
+        <h6>Dish type: {{dishType}}</h6>
+
+      </div>
 
     </div>
 
-  </div>
-  <div class="card-body">
-    <a [routerLink]="['/writeReview',recipeId ]" class="btn btn-primary">Write review</a>
-    <button class="btn btn-primary" (click)="viewReviews()">User reviews</button>
-  </div>
+    <div class="card-body">
+      <a [routerLink]="['/writeReview', recipeId ]" class="btn btn-primary" >Write review</a>
+      <button class="btn btn-primary" (click)="viewReviews()">User reviews</button>
+
+    </div>
 
 
 
 
 
 
-</div>
-
-<div class="jumbotron">
-  <h1 class="display-4">{{title}}</h1>
-  <p class="lead">
-    Ready in {{readyInMinutes}} minutes
-  </p>
-  <div>
-    <span class="badge badge-pill badge-success" *ngFor="let diet of diets" >{{diet}}</span>
-  </div>
-  <hr class="my-4">
-<div *ngIf="instructionsBySteps">
-  <p *ngFor="let step of instructionsBySteps">
-    {{step.number}}:
-    {{step.step}}
-  </p>
-</div>
-  <div *ngIf="instructions">
-    <p>{{instructions}}</p>
 
   </div>
-  <div *ngIf="!instructions">
-    <p>I'm sorry, the instructions seem to be missing. </p>
-    <button class="btn btn-primary" (click)="viewSource()">Visit source</button>
 
+  <div class="jumbotron">
+    <div class="container">
+      <div class="item"><h1 class="display-4">{{title}}</h1></div>
+      <div class="item"> <button class="btn" [ngClass]="{ 'btn-danger': isAddButton, 'btn-outline-danger': !isAddButton  }" (click)="test()"><3<span class="glyphicon glyphicon-heart" aria-hidden="false"></span></button><br></div>
+
+
+
+
+    </div>
+
+    <p class="lead">
+      Ready in {{readyInMinutes}} minutes
+    </p>
+
+    <div>
+      <span class="badge badge-pill badge-success" *ngFor="let diet of diets" >{{diet}}</span>
+    </div>
+    <hr class="my-4">
+    <div *ngIf="instructionsBySteps">
+      <p *ngFor="let step of instructionsBySteps">
+        {{step.number}}:
+        {{step.step}}
+      </p>
+    </div>
+    <div *ngIf="instructions">
+      <p>{{instructions}}</p>
+
+    </div>
+    <div *ngIf="!instructions && !instructionsBySteps">
+      <p>I'm sorry, the instructions seem to be missing. </p>
+      <button class="btn btn-primary" (click)="viewSource()">Visit source</button>
+
+    </div>
   </div>
-</div>
 
 </div>
 

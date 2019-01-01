@@ -21,6 +21,7 @@ export class RecipeComponent implements OnInit {
   dishType: String;
   recipeId: number;
   reviews;
+  isAddButton: boolean;
 
   constructor(private recipeService: RecipeService,
               private route: ActivatedRoute,
@@ -28,10 +29,11 @@ export class RecipeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isAddButton = false;
     this.route.params.subscribe(params => {
       this.recipeService.getInstructions(params['id']).subscribe(res => {
-        console.log(res)
-        this.instructionsBySteps = res;
+        console.log(res[0].steps)
+        this.instructionsBySteps = res[0].steps;
       });
       this.recipeService.getRecipe(params['id']).subscribe(res => {
         console.log(res);
@@ -87,5 +89,11 @@ export class RecipeComponent implements OnInit {
       this.reviews = JSON.stringify(res);
       console.log(this.reviews);
     });
+  }
+  test() {
+    console.log(this.isAddButton);
+    console.log('testy test');
+    this.isAddButton = !this.isAddButton;
+
   }
 }
