@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {RecipeService} from '../../services/recipe.service';
 import { ReviewService} from '../../services/review.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import { FavouritesService} from '../../services/favourites.service';
 
 @Component({
   selector: 'app-recipe',
@@ -25,7 +26,8 @@ export class RecipeComponent implements OnInit {
 
   constructor(private recipeService: RecipeService,
               private route: ActivatedRoute,
-              private reviewService: ReviewService) {
+              private reviewService: ReviewService,
+              private favouritesService: FavouritesService) {
   }
 
   ngOnInit() {
@@ -94,6 +96,8 @@ export class RecipeComponent implements OnInit {
     console.log(this.isAddButton);
     console.log('testy test');
     this.isAddButton = !this.isAddButton;
+    this.favouritesService.addFavourite(this.ingredients, this.image, this.title, this.diets, this.instructions, this.instructionsBySteps,
+      this.readyInMinutes, this.sourceUrl, this.dishType, this.recipeId);
 
   }
 }

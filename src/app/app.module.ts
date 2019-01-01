@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AdunitService } from './services/adunit.service';
 import { RecipeService } from './services/recipe.service';
+import { FavouritesService} from './services/favourites.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './auth/auth.guard';
 
@@ -57,9 +58,10 @@ import { UserReviewsComponent } from './components/user-reviews/user-reviews.com
   ],
   providers: [
     AdunitService,
-    RecipeService,
-    AuthService,
     AuthGuard,
+    AuthService,
+    FavouritesService,
+    RecipeService,
 
   ],
   bootstrap: [AppComponent]
