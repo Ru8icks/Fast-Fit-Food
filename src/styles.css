@@ -1,2 +1,8 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import "../node_modules/ng2-slim-loading-bar/style.css";
+body {
+  background-color: lightblue;
+}
+div {
+
+}

@@ -24,6 +24,8 @@
     <h3>Ingredients</h3>
     <div *ngFor="let item of ingredients" >
       <h4>{{item}}</h4>
+      <button (click)="removeIngredient(item)"  class="btn btn-danger">Remove Ingredient</button>
+
     </div>
   </div>
   <button (click)="searchForRecipes(ingredients)"  class="btn btn-primary">Search for Recipes</button>

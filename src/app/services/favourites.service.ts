@@ -23,22 +23,33 @@ addFavourite(ingredients, image, title, diets, instructions, instructionsBySteps
     readyInMinutes: readyInMinutes,
     sourceUrl: sourceUrl,
     dishType: dishType,
-    recipeId: recipeId,
+    favouriteId: recipeId,
   };
   this.http.post(`${this.uri}/addFave`, obj)
     .subscribe(res => console.log('Done'));
 }
 getFavourite(id) {
-  console.log('reviewservicessses');
+  console.log('get favoruite ');
   return this
     .http
-    .get(`${this.uri}/${id}`);
+    .get(`${this.uri}/fave/${id}`);
 }
 
-deleteReview(recipeId) {
+deleteFave(id) {
+  console.log('del rev');
   return this
     .http
-    .get(`${this.uri}/delete/${recipeId}`);
+    .get(`${this.uri}/deleteFave/${id}`).subscribe(res => console.log('Done'));
 }
+
+
+  getFavourites() {
+  console.log('getting faveourites');
+    return this
+      .http
+      .get(`${this.uri}/`);
+  }
+
+
 
 }

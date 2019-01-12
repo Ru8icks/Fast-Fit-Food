@@ -26,7 +26,7 @@ reviewRoutes.route('/add').post(function (req, res) {
 // Defined get data(index or listing) route
 reviewRoutes.route('/:id').get(function (req, res) {
   console.log('get',req.params.id);
-  Review.find({recipeId: req.params.id },function (err, review){
+  Review.find({reviewId: req.params.id } ,function (err, review){
     if(err){
       console.log(err);
     }
@@ -55,7 +55,7 @@ reviewRoutes.route('/update/:id').post(function (req, res) {
       review.review = req.body.review;
       review.rating= req.body.rating;
       review.author = req.body.author;
-      review.recipeId = req.body.recipeId;
+      review.reviewId = req.body.recipeId;
 
 
 
@@ -71,7 +71,8 @@ reviewRoutes.route('/update/:id').post(function (req, res) {
 
 // Defined delete | remove | destroy route
 reviewRoutes.route('/delete/:id').get(function (req, res) {
-  Review.findByIdAndRemove({_id: req.params.id}, function(err, review){
+  console.log('del del id')
+  Review.find({_id: req.params.id}, function(err, review){
     if(err) res.json(err);
     else res.json('Successfully removed');
   });
@@ -81,7 +82,7 @@ reviewRoutes.route('/delete/:id').get(function (req, res) {
 
 // Defined store route
 reviewRoutes.route('/addFave').post(function (req, res) {
-  console.log("here")
+  console.log("AddFave")
   let favourite = new Favourite(req.body);
   favourite.save()
     .then(() => {
@@ -96,24 +97,38 @@ reviewRoutes.route('/addFave').post(function (req, res) {
 });
 
 // Defined get data(index or listing) route
-reviewRoutes.route('/').get(function (req, res) {
+reviewRoutes.route('/fave/:id').get(function (req, res) {
+  console.log('fave:id')
 
-  Favourite.find(function (err, favourite){
+
+  Favourite.find({recipeId: req.params.id } , (function (err, favourite){
     if(err){
-      return false;
+
       console.log(err);
       res.json(err);
     }
     else {
+
       res.json(favourite);
     }
+  }));
+});
+
+// Defined delete | remove | destroy route
+reviewRoutes.route('/deleteFave/:id').get(function (req, res) {
+  console.log('DeleteFave');
+  Favourite.deleteMany({favouriteId: req.params.id}, function(err){
+    if(err) res.json(err);
+    else res.json('Successfully removed');
   });
 });
 
 
 
+
 // Defined delete | remove | destroy route
 reviewRoutes.route('/delete/:id').get(function (req, res) {
+  console.log('delete/:id')
   Favourite.findByIdAndRemove({_id: req.params.id}, function(err, favourite){
     if(err) res.json(err);
     else res.json('Successfully removed');

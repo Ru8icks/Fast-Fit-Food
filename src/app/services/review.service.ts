@@ -17,7 +17,7 @@ export class ReviewService {
       review: review,
       rating: rating,
       author: author,
-      recipeId: recipeId,
+      reviewId: recipeId,
     };
     this.http.post(`${this.uri}/add`, obj)
       .subscribe(res => console.log('Done'));
@@ -28,6 +28,7 @@ export class ReviewService {
       .http
       .get(`${this.uri}/${id}`);
   }
+
   editReview(id) {
     return this
       .http
@@ -40,7 +41,7 @@ export class ReviewService {
       review: review,
       rating: rating,
       author: author,
-      recipeId: recipeId,
+      reviewId: recipeId,
     };
     this
       .http

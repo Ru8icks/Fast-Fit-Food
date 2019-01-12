@@ -2,13 +2,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
 import { AdunitService } from '../../services/adunit.service';
+import { FavouritesService } from '../../services/favourites.service';
 import { RecipeService } from '../../services/recipe.service';
 import { FormControl } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 import {ArrayLikeObservable} from 'rxjs-compat/observable/ArrayLikeObservable';
 import {BehaviorSubject} from 'rxjs';
+import {ReviewService} from '../../services/review.service';
 
 
 @Component({
@@ -24,10 +27,12 @@ export class IngredientsComponent implements OnInit {
 
   searchResult;
   recipesResults;
+  cookbook;
+  profile;
 
 
 
-  constructor(private adunitservice: AdunitService, private recipeService: RecipeService, private fb: FormBuilder) {
+  constructor(private adunitservice: AdunitService, private recipeService: RecipeService,   private auth: AuthService, private fb: FormBuilder, private favouritesService: FavouritesService) {
     this.searchTerm.valueChanges
       .debounceTime(400)
       .subscribe(data => {
@@ -36,6 +41,16 @@ export class IngredientsComponent implements OnInit {
           this.searchResult = response;
         });
       });
+    if (this.auth.userProfile) {
+      this.profile = this.auth.userProfile;
+    } else {
+      this.auth.getProfile((err, profile) => {
+        this.profile = profile;
+      });
+    }
+    this.favouritesService.getFavourites().subscribe(response => {
+      console.log(response);
+    });
 
   }
 
@@ -49,6 +64,11 @@ export class IngredientsComponent implements OnInit {
     this.ingredients.push(ingredient.trim());
     this.searchTerm.setValue('');
     return;
+  }
+  removeIngredient(ingredient) {
+    console.log(ingredient);
+    this.ingredients = this.ingredients.filter(item => item !== ingredient);
+    console.log(this.ingredients);
   }
 
   searchForRecipes(ingredients) {

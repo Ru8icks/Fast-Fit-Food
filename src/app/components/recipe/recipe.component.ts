@@ -94,10 +94,17 @@ export class RecipeComponent implements OnInit {
   }
   test() {
     console.log(this.isAddButton);
-    console.log('testy test');
+    console.log('testy tesasdasdt');
+    if (!this.isAddButton) {
+      console.log('is add ', this.isAddButton)
+      this.favouritesService.addFavourite(this.ingredients, this.image, this.title, this.diets, this.instructions, this.instructionsBySteps,
+        this.readyInMinutes, this.sourceUrl, this.dishType, this.recipeId);
+    } else {
+      this.favouritesService.deleteFave(this.recipeId);
+      console.log('is add da ', this.isAddButton);
+    }
     this.isAddButton = !this.isAddButton;
-    this.favouritesService.addFavourite(this.ingredients, this.image, this.title, this.diets, this.instructions, this.instructionsBySteps,
-      this.readyInMinutes, this.sourceUrl, this.dishType, this.recipeId);
+
 
   }
 }

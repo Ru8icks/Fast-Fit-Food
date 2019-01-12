@@ -32,7 +32,7 @@ let Favourite = new Schema({
   dishType: {
     type: String
   },
-  recipeId: {
+  favouriteId: {
     type: String
   },
 

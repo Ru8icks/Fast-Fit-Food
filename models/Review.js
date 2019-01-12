@@ -16,7 +16,7 @@ let Review = new Schema({
   author: {
     type: String
   },
-  recipeId: {
+  reviewId: {
     type: String
   },
 
