@@ -35,6 +35,9 @@ let Favourite = new Schema({
   favouriteId: {
     type: String
   },
+  userId: {
+    type: String
+  },
 
 
 },{

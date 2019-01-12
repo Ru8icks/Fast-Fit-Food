@@ -3,6 +3,7 @@ import {RecipeService} from '../../services/recipe.service';
 import { ReviewService} from '../../services/review.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import { FavouritesService} from '../../services/favourites.service';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-recipe',
@@ -23,14 +24,23 @@ export class RecipeComponent implements OnInit {
   recipeId: number;
   reviews;
   isAddButton: boolean;
+  profile;
 
   constructor(private recipeService: RecipeService,
               private route: ActivatedRoute,
               private reviewService: ReviewService,
+              private auth: AuthService,
               private favouritesService: FavouritesService) {
   }
 
   ngOnInit() {
+    if (this.auth.userProfile) {
+      this.profile = this.auth.userProfile;
+    } else {
+      this.auth.getProfile((err, profile) => {
+        this.profile = profile;
+      });
+    }
     this.isAddButton = false;
     this.route.params.subscribe(params => {
       this.recipeService.getInstructions(params['id']).subscribe(res => {
@@ -96,9 +106,9 @@ export class RecipeComponent implements OnInit {
     console.log(this.isAddButton);
     console.log('testy tesasdasdt');
     if (!this.isAddButton) {
-      console.log('is add ', this.isAddButton)
+      console.log('is add ', this.isAddButton,  this.profile.nickname)
       this.favouritesService.addFavourite(this.ingredients, this.image, this.title, this.diets, this.instructions, this.instructionsBySteps,
-        this.readyInMinutes, this.sourceUrl, this.dishType, this.recipeId);
+        this.readyInMinutes, this.sourceUrl, this.dishType, this.recipeId, this.profile.nickname);
     } else {
       this.favouritesService.deleteFave(this.recipeId);
       console.log('is add da ', this.isAddButton);

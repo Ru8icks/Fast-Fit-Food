@@ -48,10 +48,6 @@ export class IngredientsComponent implements OnInit {
         this.profile = profile;
       });
     }
-    this.favouritesService.getFavourites().subscribe(response => {
-      console.log(response);
-    });
-
   }
 
 
@@ -85,5 +81,10 @@ export class IngredientsComponent implements OnInit {
       searchString += searchItem + '%2C';
     }
     return searchString;
+  }
+  getCookBook(){
+    this.favouritesService.getFavourites(this.profile.nickname).subscribe(response => {
+      console.log(response);
+    });
   }
 }

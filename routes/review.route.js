@@ -80,7 +80,7 @@ reviewRoutes.route('/delete/:id').get(function (req, res) {
 
 
 
-// Defined store route
+// Defined store route FAVEFAVCCE
 reviewRoutes.route('/addFave').post(function (req, res) {
   console.log("AddFave")
   let favourite = new Favourite(req.body);
@@ -125,14 +125,18 @@ reviewRoutes.route('/deleteFave/:id').get(function (req, res) {
 
 
 
+reviewRoutes.route('/getFave/:id').get(function (req, res) {
 
-// Defined delete | remove | destroy route
-reviewRoutes.route('/delete/:id').get(function (req, res) {
-  console.log('delete/:id')
-  Favourite.findByIdAndRemove({_id: req.params.id}, function(err, favourite){
-    if(err) res.json(err);
-    else res.json('Successfully removed');
+  console.log('get',req.params.id);
+  Favourite.find({userId: req.params.id } ,function (err, review){
+    if(err){
+      console.log(err);
+    }
+    else {
+      res.json(review);
+    }
   });
 });
+
 
 module.exports = reviewRoutes;
