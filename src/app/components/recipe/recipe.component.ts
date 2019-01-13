@@ -65,7 +65,7 @@ export class RecipeComponent implements OnInit {
         console.log(this.instructions);
         if (!this.instructionsBySteps) {
           // @ts-ignore
-          if (res.analyzedInstructions.length == 1) {
+          if (res.analyzedInstructions.length === 1) {
             // @ts-ignore
             console.log(res.analyzedInstructions[0].steps);
             // @ts-ignore
@@ -83,6 +83,11 @@ export class RecipeComponent implements OnInit {
         this.dishType = res.dishTypes;
         // @ts-ignore
         this.recipeId = res.id;
+      });
+      this.favouritesService.getFavourite(params['id']).subscribe(res => {
+        if (res) {
+          this.isAddButton = true;
+        }
       });
     });
   }
@@ -107,8 +112,7 @@ export class RecipeComponent implements OnInit {
     console.log('testy tesasdasdt');
     if (!this.isAddButton) {
       console.log('is add ', this.isAddButton,  this.profile.nickname)
-      this.favouritesService.addFavourite(this.ingredients, this.image, this.title, this.diets, this.instructions, this.instructionsBySteps,
-        this.readyInMinutes, this.sourceUrl, this.dishType, this.recipeId, this.profile.nickname);
+      this.favouritesService.addFavourite(this.image, this.title, this.recipeId, this.profile.nickname);
     } else {
       this.favouritesService.deleteFave(this.recipeId);
       console.log('is add da ', this.isAddButton);

@@ -98,10 +98,8 @@ reviewRoutes.route('/addFave').post(function (req, res) {
 
 // Defined get data(index or listing) route
 reviewRoutes.route('/fave/:id').get(function (req, res) {
-  console.log('fave:id')
-
-
-  Favourite.find({recipeId: req.params.id } , (function (err, favourite){
+  console.log('fave:id ', req.params.id)
+  Favourite.find({favouriteId: req.params.id } , (function (err, favourite){
     if(err){
 
       console.log(err);
@@ -128,12 +126,13 @@ reviewRoutes.route('/deleteFave/:id').get(function (req, res) {
 reviewRoutes.route('/getFave/:id').get(function (req, res) {
 
   console.log('get',req.params.id);
-  Favourite.find({userId: req.params.id } ,function (err, review){
+
+  Favourite.find({userId: req.params.id } ,function (err, favourite){
     if(err){
       console.log(err);
     }
     else {
-      res.json(review);
+      res.json(favourite);
     }
   });
 });

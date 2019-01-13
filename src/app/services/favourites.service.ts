@@ -12,17 +12,10 @@ uri = 'http://localhost:4000/reviews';
 constructor(private http: HttpClient) { }
 
 
-addFavourite(ingredients, image, title, diets, instructions, instructionsBySteps, readyInMinutes, sourceUrl, dishType, favouriteId, userId) {
+addFavourite( image, title, favouriteId, userId) {
   const obj = {
-    ingredients: ingredients,
     image: image,
     title: title,
-    diets: diets,
-    instructions: instructions,
-    instructionsBySteps: instructionsBySteps,
-    readyInMinutes: readyInMinutes,
-    sourceUrl: sourceUrl,
-    dishType: dishType,
     favouriteId: favouriteId,
     userId: userId,
   };

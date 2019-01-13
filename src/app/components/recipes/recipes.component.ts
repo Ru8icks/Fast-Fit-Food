@@ -11,6 +11,7 @@ export class RecipesComponent implements OnInit {
   title: String;
   image: String;
   id: number;
+  fav = true;
 
   constructor( private router: Router) { }
 
@@ -18,7 +19,11 @@ export class RecipesComponent implements OnInit {
     console.log(this.recipe);
     this.title  = this.recipe.title;
     this.image = this.recipe.image;
-    this.id = this.recipe.id;
+    if (this.recipe.id) {
+      this.id = this.recipe.id;
+    } else {
+      this.id = this.recipe.favouriteId;
+    }
   }
 
   viewRecipe() {

@@ -82,9 +82,9 @@ export class IngredientsComponent implements OnInit {
     }
     return searchString;
   }
-  getCookBook(){
+  getCookBook() {
     this.favouritesService.getFavourites(this.profile.nickname).subscribe(response => {
-      console.log(response);
+      this.cookbook = response;
     });
   }
 }
