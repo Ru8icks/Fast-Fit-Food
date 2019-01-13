@@ -14,7 +14,7 @@ export class AuthService {
     domain: 'swim.eu.auth0.com',
     responseType: 'token id_token',
     redirectUri: 'http://localhost:4200/callback',
-    scope: 'openid profile'
+    scope: 'openid email profile'
   });
   userProfile: any;
 

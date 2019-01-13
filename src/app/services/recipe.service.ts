@@ -29,15 +29,16 @@ export class RecipeService {
         return results;
     });
   }
-  searchForRecipes(ingredients) {
+  searchForRecipes(ingredients, rank) {
     console.log(ingredients);
     let headers: HttpHeaders = new HttpHeaders();
     headers = headers.append('X-Mashape-Key', APIKEY);
     headers = headers.append('X-Mashape-Host', 'spoonacular-recipe-food-nutrition-v1.p.mashape.com');
     const results = [];
+    console.log(rank, ' rank')
 
     return this.http.get(`https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?` +
-      `ingredients=${ingredients}&number=5&ranking=1`,
+      `ingredients=${ingredients}&number=50&ranking=${rank}`,
       {headers});
 
 

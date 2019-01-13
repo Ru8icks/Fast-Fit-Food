@@ -26,20 +26,6 @@ export const routes: Routes = [
     ]
   },
   {
-    path: 'edit/:id',
-    component: EditComponent,
-    canActivate: [
-      AuthGuard
-    ]
-  },
-  {
-    path: 'index',
-    component: IndexComponent,
-    canActivate: [
-      AuthGuard
-    ]
-  },
-  {
     path: 'recipe/:id',
     component: RecipeComponent,
     canActivate: [

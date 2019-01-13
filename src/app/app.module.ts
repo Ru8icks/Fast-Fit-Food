@@ -3,8 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { IngredientsComponent } from './components/ingredients/ingredients.component';
-import { IndexComponent } from './components/index/index.component';
-import { EditComponent } from './components/edit/edit.component';
+
 import {RouterModule} from '@angular/router';
 import { routes } from './app.routes';
 
@@ -35,8 +34,6 @@ import { UserReviewsComponent } from './components/user-reviews/user-reviews.com
   declarations: [
     AppComponent,
     IngredientsComponent,
-    IndexComponent,
-    EditComponent,
     RecipesComponent,
     RecipeComponent,
     CallbackComponent,

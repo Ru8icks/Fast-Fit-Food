@@ -29,6 +29,7 @@ export class IngredientsComponent implements OnInit {
   recipesResults;
   cookbook;
   profile;
+  rank: number;
 
 
 
@@ -69,7 +70,7 @@ export class IngredientsComponent implements OnInit {
 
   searchForRecipes(ingredients) {
     const search = this.createSearchString(ingredients);
-    this.recipeService.searchForRecipes(search).subscribe(response => {
+    this.recipeService.searchForRecipes(search, this.rank).subscribe(response => {
       this.recipesResults = response;
     });
   }
@@ -85,6 +86,9 @@ export class IngredientsComponent implements OnInit {
   getCookBook() {
     this.favouritesService.getFavourites(this.profile.nickname).subscribe(response => {
       this.cookbook = response;
+    });
+    this.favouritesService.sendmail(this.profile.email).subscribe( res => {
+      console.log(res);
     });
   }
 }

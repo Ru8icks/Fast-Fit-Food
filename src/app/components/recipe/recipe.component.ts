@@ -41,11 +41,13 @@ export class RecipeComponent implements OnInit {
         this.profile = profile;
       });
     }
-    this.isAddButton = false;
     this.route.params.subscribe(params => {
       this.recipeService.getInstructions(params['id']).subscribe(res => {
-        console.log(res[0].steps)
-        this.instructionsBySteps = res[0].steps;
+        console.log(Object.values(res).length)
+        if (Object.values(res).length > 1) {
+          console.log('steps');
+          this.instructionsBySteps = res[0].steps;
+        }
       });
       this.recipeService.getRecipe(params['id']).subscribe(res => {
         console.log(res);
@@ -63,6 +65,7 @@ export class RecipeComponent implements OnInit {
         // @ts-ignore
         this.sourceUrl = res.sourceUrl;
         console.log(this.instructions);
+        console.log(!this.instructionsBySteps);
         if (!this.instructionsBySteps) {
           // @ts-ignore
           if (res.analyzedInstructions.length === 1) {
@@ -85,8 +88,10 @@ export class RecipeComponent implements OnInit {
         this.recipeId = res.id;
       });
       this.favouritesService.getFavourite(params['id']).subscribe(res => {
-        if (res) {
+        if (Object.values(res).length >= 1) {
           this.isAddButton = true;
+        } else {
+          this.isAddButton = false;
         }
       });
     });
@@ -97,6 +102,7 @@ export class RecipeComponent implements OnInit {
 
   toggleMetric() {
     this.metric = !this.metric;
+    console.log(this.profile);
   }
 
   viewReviews() {
