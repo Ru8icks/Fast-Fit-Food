@@ -135,7 +135,6 @@ export class RecipeComponent implements OnInit {
     let mailString = JSON.stringify(shoppingList).replace( '[' , ' ');
     mailString = mailString.replace( ']' , ' ');
     mailString = mailString.replace( /"/g, ' ' );
-    mailString = mailString.replace( /,/g , '</br>');
     console.log(shoppingList, ' shopping shopping  ', JSON.stringify(shoppingList).replace( '[' , ' ') )
     this.emailService.sendmail(this.profile.email, mailString).subscribe( res => {
       console.log(res);
