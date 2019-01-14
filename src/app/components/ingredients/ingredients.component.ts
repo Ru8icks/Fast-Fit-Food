@@ -87,8 +87,5 @@ export class IngredientsComponent implements OnInit {
     this.favouritesService.getFavourites(this.profile.nickname).subscribe(response => {
       this.cookbook = response;
     });
-    this.favouritesService.sendmail(this.profile.email).subscribe( res => {
-      console.log(res);
-    });
   }
 }

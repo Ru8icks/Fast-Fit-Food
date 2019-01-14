@@ -6,7 +6,6 @@ const reviewRoutes = express.Router();
 const  Mailgun = require('mailgun-js');
 let keys = require('../env.js');
 
-console.log()
 
 // Require AdUnit model in our routes module
 let Review = require('../models/Review');
@@ -156,7 +155,8 @@ const from_who = 'your@email.com';
 
 // Send a message to the specified email address when you navigate to /submit/someaddr@email.com
 // The index redirects here
-reviewRoutes.route('/submit/:mail').get( function(req,res) {
+reviewRoutes.route('/submit/:mail/:msg').get( function(req,res) {
+
   //We pass the api_key and domain to the wrapper, or it won't be able to identify + send emails
   const mailgun = new Mailgun({apiKey: api_key, domain: domain});
   const data = {
@@ -166,7 +166,7 @@ reviewRoutes.route('/submit/:mail').get( function(req,res) {
     to: req.params.mail,
     //Subject and text data
     subject: 'Hello from Mailgun',
-    html: 'Hello, This is not a plain-text email, I wanted to test some spicy Mailgun sauce in NodeJS! Click here to add your email address to a mailing list</a>'
+    html: decodeURIComponent(req.params.msg)
   }
   //Invokes the method to send emails given the above data with the helper library
   mailgun.messages().send(data, function (err, body) {

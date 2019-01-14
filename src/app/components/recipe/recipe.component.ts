@@ -4,6 +4,7 @@ import { ReviewService} from '../../services/review.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import { FavouritesService} from '../../services/favourites.service';
 import {AuthService} from '../../services/auth.service';
+import {EmailService} from '../../services/email.service';
 
 @Component({
   selector: 'app-recipe',
@@ -30,7 +31,8 @@ export class RecipeComponent implements OnInit {
               private route: ActivatedRoute,
               private reviewService: ReviewService,
               private auth: AuthService,
-              private favouritesService: FavouritesService) {
+              private favouritesService: FavouritesService,
+              private emailService: EmailService) {
   }
 
   ngOnInit() {
@@ -113,7 +115,7 @@ export class RecipeComponent implements OnInit {
       console.log(this.reviews);
     });
   }
-  test() {
+  addToFaveourites() {
     console.log(this.isAddButton);
     console.log('testy tesasdasdt');
     if (!this.isAddButton) {
@@ -126,5 +128,17 @@ export class RecipeComponent implements OnInit {
     this.isAddButton = !this.isAddButton;
 
 
+  }
+
+  emailIngredients() {
+    const shoppingList = this.ingredients.map(item =>  item.name);
+    let mailString = JSON.stringify(shoppingList).replace( '[' , ' ');
+    mailString = mailString.replace( ']' , ' ');
+    mailString = mailString.replace( /"/g, ' ' );
+    mailString = mailString.replace( /,/g , '</br>');
+    console.log(shoppingList, ' shopping shopping  ', JSON.stringify(shoppingList).replace( '[' , ' ') )
+    this.emailService.sendmail(this.profile.email, mailString).subscribe( res => {
+      console.log(res);
+    });
   }
 }

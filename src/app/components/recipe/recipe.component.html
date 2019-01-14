@@ -26,6 +26,7 @@
     <div class="card-body">
       <a [routerLink]="['/writeReview', recipeId ]" class="btn btn-primary" >Write review</a>
       <button class="btn btn-primary" (click)="viewReviews()">User reviews</button>
+      <button class="btn btn-primary" (click)="emailIngredients()">Shopping List</button>
 
     </div>
 
@@ -40,7 +41,7 @@
   <div class="jumbotron">
     <div class="container">
       <div class="item"><h1 class="display-4">{{title}}</h1></div>
-      <div class="item"> <button class="btn" [ngClass]="{ 'btn-danger': isAddButton, 'btn-outline-danger': !isAddButton  }" (click)="test()"><3<span class="glyphicon glyphicon-heart" aria-hidden="false"></span></button><br></div>
+      <div class="item"> <button class="btn" [ngClass]="{ 'btn-danger': isAddButton, 'btn-outline-danger': !isAddButton  }" (click)="addToFaveourites()"><3<span class="glyphicon glyphicon-heart" aria-hidden="false"></span></button><br></div>
 
 
 
