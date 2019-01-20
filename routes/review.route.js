@@ -10,6 +10,7 @@ let keys = require('../env.js');
 // Require AdUnit model in our routes module
 let Review = require('../models/Review');
 let Favourite = require('../models/Favourite');
+let Program = require('../models/Program');
 
 // Defined store route
 reviewRoutes.route('/add').post(function (req, res) {
@@ -140,6 +141,39 @@ reviewRoutes.route('/getFave/:id').get(function (req, res) {
     }
   });
 });
+
+
+//Program Routes
+//  Defined update route
+reviewRoutes.route('/addProgram').post(function (req, res) {
+
+  console.log(req.body)
+  let program = new Program(req.body);
+  program.save()
+    .then(() => {
+      res.status(200).json({'program': 'program in added successfully'});
+      console.log("save ",program.program )
+
+
+    })
+    .catch(err => {
+      res.status(400).send("unable to save to database");
+    });
+});
+reviewRoutes.route('/getPrograms').get(function (req, res) {
+  console.log('get',req.params.id);
+  Program.find({author: req.params.id } ,function (err, res){
+    if(err){
+      console.log(err);
+    }
+    else {
+      res.json(res);
+    }
+  });
+});
+
+
+
 
 //Email
 

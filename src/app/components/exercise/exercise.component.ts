@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
+import {ProgramService} from '../../services/program.service';
+import {AuthService} from '../../services/auth.service';
+
+
 
 @Component({
   selector: 'app-exercise',
@@ -8,11 +12,22 @@ import {Router} from '@angular/router';
 })
 export class ExerciseComponent implements OnInit {
   programs: Array<Object>;
+  profile;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private programService: ProgramService,
+              private auth: AuthService) {}
 
   ngOnInit() {
+    if (this.auth.userProfile) {
+      this.profile = this.auth.userProfile;
+    } else {
+      this.auth.getProfile((err, profile) => {
+        this.profile = profile;
+      });
+    }
   }
+
 
   edit() {
 

@@ -43,12 +43,7 @@ deleteFave(id) {
       .http
       .get(`${this.uri}/getFave/${id}`);
   }
-  sendmail(mail) {
-    console.log('getting mail ', mail);
-    return this
-      .http
-      .get(`${this.uri}/submit/${mail}`);
-  }
+
 
 
 
