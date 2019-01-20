@@ -8,12 +8,28 @@ import {CallbackComponent} from './components/callback/callback.component';
 import {NgModule} from '@angular/core';
 import {AuthGuard} from './auth/auth.guard';
 import {WriteReviewComponent} from './components/write-review/write-review.component';
+import {ExerciseComponent} from './components/exercise/exercise.component';
+import {ProgramComponent} from './components/exercise/program/program.component';
 
 
 export const routes: Routes = [
   {
     path: 'ingredients',
     component: IngredientsComponent,
+    canActivate: [
+      AuthGuard
+    ]
+  },
+  {
+    path: 'exercise',
+    component: ExerciseComponent,
+    canActivate: [
+      AuthGuard
+    ]
+  },
+  {
+    path: 'program',
+    component: ProgramComponent,
     canActivate: [
       AuthGuard
     ]

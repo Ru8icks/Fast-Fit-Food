@@ -33,7 +33,11 @@ export class IngredientsComponent implements OnInit {
 
 
 
-  constructor(private adunitservice: AdunitService, private recipeService: RecipeService,   private auth: AuthService, private fb: FormBuilder, private favouritesService: FavouritesService) {
+  constructor(private adunitservice: AdunitService,
+              private recipeService: RecipeService,
+              private auth: AuthService,
+              private fb: FormBuilder,
+              private favouritesService: FavouritesService) {
     this.searchTerm.valueChanges
       .debounceTime(400)
       .subscribe(data => {
@@ -84,8 +88,13 @@ export class IngredientsComponent implements OnInit {
     return searchString;
   }
   getCookBook() {
-    this.favouritesService.getFavourites(this.profile.nickname).subscribe(response => {
-      this.cookbook = response;
-    });
+    if (this.cookbook) {
+      this.cookbook = null;
+      console.log(this.cookbook);
+    } else {
+      this.favouritesService.getFavourites(this.profile.nickname).subscribe(response => {
+        this.cookbook = response;
+      });
+    }
   }
 }

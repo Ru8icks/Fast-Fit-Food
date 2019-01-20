@@ -28,6 +28,8 @@ import { RecipeComponent } from './components/recipe/recipe.component';
 import { CallbackComponent } from './components/callback/callback.component';
 import { WriteReviewComponent } from './components/write-review/write-review.component';
 import { UserReviewsComponent } from './components/user-reviews/user-reviews.component';
+import { ExerciseComponent } from './components/exercise/exercise.component';
+import { ProgramComponent } from './components/exercise/program/program.component';
 
 
 @NgModule({
@@ -38,7 +40,9 @@ import { UserReviewsComponent } from './components/user-reviews/user-reviews.com
     RecipeComponent,
     CallbackComponent,
     WriteReviewComponent,
-    UserReviewsComponent
+    UserReviewsComponent,
+    ExerciseComponent,
+    ProgramComponent
   ],
   imports: [
     BrowserModule,

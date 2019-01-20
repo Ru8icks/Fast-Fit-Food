@@ -1,0 +1,18 @@
+<div class="card">
+  <div class="card-body">
+    <h3>
+      Programs
+    </h3>
+    <div class="card">
+      <div class="card-body">
+        <ul>
+          <li *ngFor="let program of programs">
+            {{program}}<button class="btn btn-primary" (click)="exercise()">Exercise</button><button class="btn btn-outline-danger" (click)="edit()">Edit</button>
+
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-primary" (click)="newProgram()">New Program</button>
+</div>
