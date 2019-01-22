@@ -29,6 +29,7 @@ import { CallbackComponent } from './components/callback/callback.component';
 import { WriteReviewComponent } from './components/write-review/write-review.component';
 import { UserReviewsComponent } from './components/user-reviews/user-reviews.component';
 import { ExerciseComponent } from './components/exercise/exercise.component';
+import { ExerciseResolver } from './components/exercise/exercise.resolver';
 import { ProgramComponent } from './components/exercise/program/program.component';
 
 
@@ -63,6 +64,7 @@ import { ProgramComponent } from './components/exercise/program/program.componen
     AuthService,
     FavouritesService,
     RecipeService,
+    ExerciseResolver,
 
   ],
   bootstrap: [AppComponent]

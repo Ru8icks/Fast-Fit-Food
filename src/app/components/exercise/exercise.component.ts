@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {ProgramService} from '../../services/program.service';
 import {AuthService} from '../../services/auth.service';
-
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -16,16 +16,12 @@ export class ExerciseComponent implements OnInit {
 
   constructor(private router: Router,
               private programService: ProgramService,
-              private auth: AuthService) {}
+              private auth: AuthService,
+              private route: ActivatedRoute) {}
 
   ngOnInit() {
-    if (this.auth.userProfile) {
-      this.profile = this.auth.userProfile;
-    } else {
-      this.auth.getProfile((err, profile) => {
-        this.profile = profile;
-      });
-    }
+    this.profile = this.route.snapshot.data;
+    console.log(this.profile.profile.nickname, 'here');
   }
 
 

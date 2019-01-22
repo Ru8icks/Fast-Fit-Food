@@ -10,6 +10,7 @@ import {AuthGuard} from './auth/auth.guard';
 import {WriteReviewComponent} from './components/write-review/write-review.component';
 import {ExerciseComponent} from './components/exercise/exercise.component';
 import {ProgramComponent} from './components/exercise/program/program.component';
+import {ExerciseResolver} from './components/exercise/exercise.resolver';
 
 
 export const routes: Routes = [
@@ -23,6 +24,7 @@ export const routes: Routes = [
   {
     path: 'exercise',
     component: ExerciseComponent,
+    resolve: { profile: ExerciseResolver },
     canActivate: [
       AuthGuard
     ]
@@ -63,7 +65,8 @@ export const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   providers: [
-    AuthGuard
+    AuthGuard,
+    ExerciseResolver,
   ],
   exports: [RouterModule]
 })
