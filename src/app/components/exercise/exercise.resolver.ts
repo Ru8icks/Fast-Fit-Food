@@ -13,15 +13,15 @@ export class ExerciseResolver implements Resolve<Observable<string>> {
 
   resolve() {
     let profile;
-    if (this.auth.userProfile !== undefined) {
-      profile = this.auth.userProfile;
-      console.log('this.auth.userProfile ', profile);
+    if (this.auth.userProfile) {
+      console.log('this.auth.userProfile ',  this.auth.userProfile);
+      return this.auth.userProfile;
     } else {
       this.auth.getProfile((err, res) => {
         console.log('else ')
-        profile = res;
+        console.log('else ')
+        return res;
       });
     }
-    return profile;
   }
 }

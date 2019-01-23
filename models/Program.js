@@ -9,6 +9,9 @@ let Program = new Schema({
   program: {
     type: [Object]
   },
+  name: {
+    type: String
+  },
   author: {
     type: String
   },

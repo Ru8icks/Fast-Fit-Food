@@ -160,14 +160,14 @@ reviewRoutes.route('/addProgram').post(function (req, res) {
       res.status(400).send("unable to save to database");
     });
 });
-reviewRoutes.route('/getPrograms').get(function (req, res) {
+reviewRoutes.route('/getPrograms/:id').get(function (req, res) {
   console.log('get',req.params.id);
-  Program.find({author: req.params.id } ,function (err, res){
+  Program.find({author: req.params.id } ,function (err, programs){
     if(err){
       console.log(err);
     }
     else {
-      res.json(res);
+      res.json(programs);
     }
   });
 });

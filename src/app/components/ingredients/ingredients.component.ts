@@ -48,9 +48,11 @@ export class IngredientsComponent implements OnInit {
       });
     if (this.auth.userProfile) {
       this.profile = this.auth.userProfile;
+      console.log('if ', this.profile);
     } else {
       this.auth.getProfile((err, profile) => {
         this.profile = profile;
+        console.log(this.profile, 'else');
       });
     }
   }

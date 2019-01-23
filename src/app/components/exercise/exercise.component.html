@@ -7,7 +7,7 @@
       <div class="card-body">
         <ul>
           <li *ngFor="let program of programs">
-            {{program}}<button class="btn btn-primary" (click)="exercise()">Exercise</button><button class="btn btn-outline-danger" (click)="edit()">Edit</button>
+            {{program.name}}<button class="btn btn-primary" (click)="exercise()">Exercise</button><button class="btn btn-outline-danger" (click)="edit()">Edit</button>
 
           </li>
         </ul>

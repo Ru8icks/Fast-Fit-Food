@@ -12,20 +12,21 @@ export class ProgramService {
   constructor(private http: HttpClient) { }
 
 
-  addProgram(program, nickname) {
+  addProgram(program, nickname, name) {
     const obj = {
       program: program,
+      name: name,
       author: nickname
     };
-    console.log(obj)
+    console.log(obj);
     this.http.post(`${this.uri}/addProgram`, obj)
       .subscribe(res => console.log('Done ', res));
   }
-  getProgram(id) {
-    console.log('get program ');
+  getPrograms(id) {
+    console.log('get programs ');
     return this
       .http
-      .get(`${this.uri}/getProgram/${id}`);
+      .get(`${this.uri}/getPrograms/${id}`);
   }
 
   deleteProgram(id) {

@@ -18,6 +18,7 @@ export interface Exercise {
 })
 export class ProgramComponent implements OnInit {
   myControl = new FormControl();
+  nameControl = new FormControl();
   options: Exercise[] = [
     {name: 'Bench Press'},
     {name: 'Squats'},
@@ -25,6 +26,7 @@ export class ProgramComponent implements OnInit {
   ]
   program: Exercise[] = new Array<Exercise>();
   profile;
+  name: string;
   filteredOptions: Observable<Exercise[]>;
 
   constructor(private programService: ProgramService,
@@ -65,7 +67,12 @@ export class ProgramComponent implements OnInit {
 
   saveProgram() {
     console.log('Save program');
-    this.programService.addProgram(this.program, this.profile.nickname);
+    this.name = this.nameControl.value;
+    this.programService.addProgram(this.program, this.profile.nickname, this.name);
 
+  }
+
+  inputer() {
+    console.log(this.name);
   }
 }
