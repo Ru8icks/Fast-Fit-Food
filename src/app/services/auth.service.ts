@@ -76,5 +76,19 @@ export class AuthService {
       cb(err, profile);
     });
   }
+  public getProfiled(): void {
+    const accessToken = localStorage.getItem('access_token');
+    if (!accessToken) {
+      throw new Error('Access Token must exist to fetch profile');
+    }
+
+    const self = this;
+    this.auth0.client.userInfo(accessToken, (err, profile) => {
+      if (profile) {
+        self.userProfile = profile;
+      }
+       return profile;
+    });
+  }
 
 }

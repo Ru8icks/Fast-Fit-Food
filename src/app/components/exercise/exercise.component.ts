@@ -20,9 +20,22 @@ export class ExerciseComponent implements OnInit {
               private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.profile = this.route.snapshot.data.profile;
-    console.log(this.profile.nickname, 'here');
-    this.programService.getPrograms(this.profile.nickname).subscribe(res => {
+    if (this.auth.userProfile) {
+      this.profile = this.auth.userProfile;
+      console.log('if ', this.profile);
+      this.getPrograms(this.profile.nickname);
+    } else {
+      this.auth.getProfile((err, profile) => {
+        this.profile = profile;
+        console.log(this.profile, 'else');
+        this.getPrograms(this.profile.nickname);
+      });
+    }
+    // this.profile = this.route.snapshot.data['profile'];
+    // console.log(this.profile.nickname, 'here');
+  }
+  getPrograms(nick) {
+    this.programService.getPrograms(nick).subscribe(res => {
       console.log(res, ' programs');
       this.programs = Object.values(res);
     });
