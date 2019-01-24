@@ -16,8 +16,7 @@ export class ExerciseComponent implements OnInit {
 
   constructor(private router: Router,
               private programService: ProgramService,
-              private auth: AuthService,
-              private route: ActivatedRoute) {}
+              private auth: AuthService) {}
 
   ngOnInit() {
     if (this.auth.userProfile) {
@@ -42,7 +41,8 @@ export class ExerciseComponent implements OnInit {
   }
 
 
-  edit() {
+  edit(id) {
+    this.router.navigate([`program`, id]);
 
   }
 

@@ -16,7 +16,7 @@ export class ProgramService {
     const obj = {
       program: program,
       name: name,
-      author: nickname
+      author: nickname,
     };
     console.log(obj);
     this.http.post(`${this.uri}/addProgram`, obj)
@@ -37,4 +37,10 @@ export class ProgramService {
   }
 
 
+  getProgram(id) {
+    console.log('get program ');
+    return this
+      .http
+      .get(`${this.uri}/getProgram/${id}`);
+  }
 }

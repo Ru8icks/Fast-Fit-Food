@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {ProgramService} from '../../../services/program.service';
 import {AuthService} from '../../../services/auth.service';
+import {ActivatedRoute} from '@angular/router';
 
 
 export interface Exercise {
@@ -30,7 +31,8 @@ export class ProgramComponent implements OnInit {
   filteredOptions: Observable<Exercise[]>;
 
   constructor(private programService: ProgramService,
-              private auth: AuthService) {
+              private auth: AuthService,
+              private route: ActivatedRoute) {
 
     if (this.auth.userProfile) {
       this.profile = this.auth.userProfile;
@@ -41,6 +43,18 @@ export class ProgramComponent implements OnInit {
     }
   }
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      if (params['id']) {
+        console.log('params')
+        this.programService.getProgram(params['id']).subscribe((res  => {
+          console.log(Object.values(res));
+          console.log(res);
+          this.program = res.program;
+          this.nameControl.setValue(res.name);
+
+        }));
+      }
+    });
     this.filteredOptions = this.myControl.valueChanges
       .pipe(
         startWith<string | Exercise>(''),
@@ -67,8 +81,7 @@ export class ProgramComponent implements OnInit {
 
   saveProgram() {
     console.log('Save program');
-    this.name = this.nameControl.value;
-    this.programService.addProgram(this.program, this.profile.nickname, this.name);
+    this.programService.addProgram(this.program, this.profile.nickname, this.nameControl.value);
 
   }
 

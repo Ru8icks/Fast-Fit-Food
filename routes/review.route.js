@@ -171,6 +171,18 @@ reviewRoutes.route('/getPrograms/:id').get(function (req, res) {
     }
   });
 });
+reviewRoutes.route('/getProgram/:id').get(function (req, res) {
+  console.log('get',req.params.id);
+  Program.findOne({_id: req.params.id } ,function (err, programs){
+    if(err){
+      console.log(err);
+    }
+    else {
+      res.json(programs);
+    }
+  });
+});
+
 
 
 

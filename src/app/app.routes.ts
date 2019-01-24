@@ -37,6 +37,13 @@ export const routes: Routes = [
     ]
   },
   {
+    path: 'program/:id',
+    component: ProgramComponent,
+    canActivate: [
+      AuthGuard
+    ]
+  },
+  {
     path: 'home',
     component: IngredientsComponent,
     canActivate: [
