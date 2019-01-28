@@ -31,6 +31,8 @@ import { UserReviewsComponent } from './components/user-reviews/user-reviews.com
 import { ExerciseComponent } from './components/exercise/exercise.component';
 import { ExerciseResolver } from './components/exercise/exercise.resolver';
 import { ProgramComponent } from './components/exercise/program/program.component';
+import { ExerciserComponent } from './components/exercise/exerciser/exerciser.component';
+
 
 
 @NgModule({
@@ -43,7 +45,8 @@ import { ProgramComponent } from './components/exercise/program/program.componen
     WriteReviewComponent,
     UserReviewsComponent,
     ExerciseComponent,
-    ProgramComponent
+    ProgramComponent,
+    ExerciserComponent,
   ],
   imports: [
     BrowserModule,

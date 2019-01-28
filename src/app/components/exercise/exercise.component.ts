@@ -46,7 +46,8 @@ export class ExerciseComponent implements OnInit {
 
   }
 
-  exercise() {
+  exercise(id) {
+    this.router.navigate([`exerciser`, id]);
 
   }
 

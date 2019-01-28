@@ -49,7 +49,9 @@ export class ProgramComponent implements OnInit {
         this.programService.getProgram(params['id']).subscribe((res  => {
           console.log(Object.values(res));
           console.log(res);
+          // @ts-ignore
           this.program = res.program;
+          // @ts-ignore
           this.nameControl.setValue(res.name);
 
         }));
