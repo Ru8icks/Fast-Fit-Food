@@ -9,6 +9,7 @@ interface Set {
   set: {reps: number,
     weight: number
   };
+  max?: number;
 }
 
 @Component({
@@ -24,7 +25,7 @@ export class ExerciserComponent implements OnInit {
   private type = 'Weight';
   private currentEx;
   private sets: Array<Set> = new Array<Set>();
-  private max: number;
+  private max = 0;
   public currentSet:  Array<Set> = new Array<Set>();
 
   constructor(private programService: ProgramService,
@@ -71,6 +72,15 @@ export class ExerciserComponent implements OnInit {
   }
 
   nextExercise() {
+    console.log(this.sets[this.sets.length - 1], 'dubiduu')
+    this.sets[this.sets.length - 1].max = this.max;
+    console.log(this.sets);
+    console.log(this.program);
+    this.max = 0;
+    if (this.program.length < 1) {
+      console.log('yes');
+      return;
+    }
 
     this.currentEx = this.program.pop().name;
     this.currentSet = this.sets.filter(x => x.name === this.currentEx);
