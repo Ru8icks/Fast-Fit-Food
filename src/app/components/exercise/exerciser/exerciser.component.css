@@ -1,0 +1,6 @@
+input {
+  width: 5vw !important; /* dirty fix*/
+
+  flex: 0 0 auto !important; /* dirty fix*/
+
+}

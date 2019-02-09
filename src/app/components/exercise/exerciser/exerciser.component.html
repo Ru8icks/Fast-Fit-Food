@@ -1,3 +1,57 @@
 <p>
   exerciser works!
 </p>
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+
+
+      <h3 class="card-title">{{name}}</h3>
+      <h6 class="card-title">{{currentEx}}</h6>
+
+      <div class="input-group mb-3">
+
+
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">Repetitions:</span>
+          <button class="btn btn-outline-secondary" type="button" id="button-minus">-</button>
+        </div>
+        <input [(ngModel)]="reps" type="number" class="form-control" placeholder="" aria-label="reps" aria-describedby="button-addon1">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" type="button" id="button-add">+</button>
+        </div>
+
+
+
+
+        <div class="input-group mb-3">
+
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon2" (click)="toggle()">{{type}}:</span>
+
+            <button class="btn btn-outline-secondary" type="button" id="button-minus2">-</button>
+          </div>
+          <input [(ngModel)]="weight" type="number" class="form-control" placeholder="" aria-label="reps" aria-describedby="button-addon1">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" id="button-add2">+</button>
+          </div>
+
+      </div>
+        <button class="btn btn-secondary" type="button" (click)="addSet()" >Add Set</button>
+
+
+    </div>
+  </div>
+
+    <div class="card">
+
+      <div class="card-body">
+        <ul>
+          <li *ngFor="let set of currentSet">{{set.set.reps}} x {{set.set.weight}}</li>
+        </ul>
+        <button class="btn btn-secondary" type="button" (click)="nextExercise()" >Next Exercise</button>
+
+      </div>
+    </div>
+
+</div>

@@ -4,7 +4,12 @@ import {AuthService} from '../../../services/auth.service';
 import {ActivatedRoute} from '@angular/router';
 import {FormControl} from '@angular/forms';
 
-
+interface Set {
+  name: string;
+  set: {reps: number,
+    weight: number
+  };
+}
 
 @Component({
   selector: 'app-exerciser',
@@ -12,8 +17,15 @@ import {FormControl} from '@angular/forms';
   styleUrls: ['./exerciser.component.css']
 })
 export class ExerciserComponent implements OnInit {
-  program;
-  nameControl = new FormControl();
+  private program;
+  private name;
+  private reps = 8;
+  private weight = 10;
+  private type = 'Weight';
+  private currentEx;
+  private sets: Array<Set> = new Array<Set>();
+  private max: number;
+  public currentSet:  Array<Set> = new Array<Set>();
 
   constructor(private programService: ProgramService,
               private route: ActivatedRoute) { }
@@ -26,9 +38,41 @@ export class ExerciserComponent implements OnInit {
           // @ts-ignore
           this.program = res.program;
           // @ts-ignore
-          this.nameControl.setValue(res.name);
+          this.name = res.name;
+          this.currentEx = this.program.pop().name;
+        console.log(res);
         }));
     });
   }
 
+  toggle() {
+    if (this.type === 'Weight') {
+      this.type = 'Time';
+    } else {
+      this.type = 'Weight';
+    }
+  }
+
+  addSet() {
+    const set: Set = {
+      name: this.currentEx,
+      set: {reps: this.reps,
+            weight: this.weight
+      },
+    };
+    console.log(set);
+    this.sets.push(set);
+    console.log(this.sets);
+    if (this.weight > this.max) {
+      this.max = this.weight;
+    }
+    this.currentSet = this.sets.filter(x => x.name === this.currentEx);
+
+  }
+
+  nextExercise() {
+
+    this.currentEx = this.program.pop().name;
+    this.currentSet = this.sets.filter(x => x.name === this.currentEx);
+  }
 }
