@@ -27,6 +27,7 @@ export class ExerciserComponent implements OnInit {
   private sets: Array<Set> = new Array<Set>();
   private max = 0;
   public currentSet:  Array<Set> = new Array<Set>();
+  done = false;
 
   constructor(private programService: ProgramService,
               private route: ActivatedRoute) { }
@@ -67,22 +68,54 @@ export class ExerciserComponent implements OnInit {
     if (this.weight > this.max) {
       this.max = this.weight;
     }
-    this.currentSet = this.sets.filter(x => x.name === this.currentEx);
+    // this.currentSet = this.sets.filter(x => x.name === this.currentEx);
+    this.currentSet = this.exerciseFilter(this.sets, this.currentEx);
 
+  }
+  private exerciseFilter(sets, currentEx) {
+    return sets.filter(x => x.name === currentEx);
   }
 
   nextExercise() {
-    console.log(this.sets[this.sets.length - 1], 'dubiduu')
+    console.log(this.sets[this.sets.length - 1], 'dubiduu');
     this.sets[this.sets.length - 1].max = this.max;
     console.log(this.sets);
     console.log(this.program);
     this.max = 0;
     if (this.program.length < 1) {
       console.log('yes');
+      this.done = true;
       return;
     }
 
     this.currentEx = this.program.pop().name;
-    this.currentSet = this.sets.filter(x => x.name === this.currentEx);
+    // this.currentSet = this.sets.filter(x => x.name === this.currentEx);
+    this.currentSet = this.exerciseFilter(this.sets, this.currentEx);
+  }
+
+  decReps() {
+    if (this.reps < 1) {
+      return;
+    }
+    this.reps--;
+  }
+
+  incReps() {
+    this.reps++;
+  }
+
+  decWeight() {
+    if (this.weight < 1) {
+      return;
+    }
+    this.weight -= 5;
+  }
+
+  incWeight() {
+    this.weight += 5;
+  }
+
+  saveWorkout() {
+    console.log('save and exit');
   }
 }

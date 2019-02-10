@@ -14,11 +14,11 @@
 
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon1">Repetitions:</span>
-          <button class="btn btn-outline-secondary" type="button" id="button-minus">-</button>
+          <button class="btn btn-outline-secondary" type="button" id="button-minus" (click)="decReps()">-</button>
         </div>
         <input [(ngModel)]="reps" type="number" class="form-control" placeholder="" aria-label="reps" aria-describedby="button-addon1">
         <div class="input-group-append">
-          <button class="btn btn-outline-secondary" type="button" id="button-add">+</button>
+          <button class="btn btn-outline-secondary" type="button" id="button-add" (click)="incReps()">+</button>
         </div>
 
 
@@ -29,11 +29,11 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon2" (click)="toggle()">{{type}}:</span>
 
-            <button class="btn btn-outline-secondary" type="button" id="button-minus2">-</button>
+            <button class="btn btn-outline-secondary" type="button" id="button-minus2" (click)="decWeight()">-</button>
           </div>
           <input [(ngModel)]="weight" type="number" class="form-control" placeholder="" aria-label="reps" aria-describedby="button-addon1">
           <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button" id="button-add2">+</button>
+            <button class="btn btn-outline-secondary" type="button" id="button-add2" (click)="incWeight()">+</button>
           </div>
 
       </div>
@@ -49,7 +49,8 @@
         <ul>
           <li *ngFor="let set of currentSet">{{set.set.reps}} x {{set.set.weight}}</li>
         </ul>
-        <button class="btn btn-secondary" type="button" (click)="nextExercise()" >Next Exercise</button>
+        <button *ngIf="!done" class="btn btn-secondary" type="button" (click)="nextExercise()" >Next Exercise</button>
+        <button *ngIf="done" class="btn btn-secondary" type="button" (click)="saveWorkout()" >Save and Exit</button>
 
       </div>
     </div>
