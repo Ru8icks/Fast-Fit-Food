@@ -1,3 +1,15 @@
+clone repository
+npm install
+download and install mongodb
+run mongod.exe
+use terminal or git bash and run 'ng serve' in food folder
+use terminal or git bash and run 'nodemon server' in src folder
+In order to search for recepies you need an API key from spoonacular
+To send shopping list on email you need an API key from mailgun and add a domain to your mailgun account. 
+
+
+
+
 # Mean
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.5.
