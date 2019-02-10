@@ -22,7 +22,7 @@ export class WorkoutService {
     this.http.post(`${this.uri}/addWorkout`, obj)
       .subscribe(res => console.log('Done ', res));
   }
-  getPrograms(id) {
+  getWorkouts(id) {
     console.log('get workout ', id);
     return this
       .http

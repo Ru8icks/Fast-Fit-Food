@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ProgramService} from '../../../services/program.service';
+import {WorkoutService} from '../../../services/workout.service';
 import {AuthService} from '../../../services/auth.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {FormControl} from '@angular/forms';
 
 interface Set {
@@ -28,8 +29,12 @@ export class ExerciserComponent implements OnInit {
   private max = 0;
   public currentSet:  Array<Set> = new Array<Set>();
   done = false;
+  profile;
 
   constructor(private programService: ProgramService,
+              private workoutService: WorkoutService,
+              private auth: AuthService,
+              private router: Router,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -45,6 +50,13 @@ export class ExerciserComponent implements OnInit {
         console.log(res);
         }));
     });
+    if (this.auth.userProfile) {
+      this.profile = this.auth.userProfile;
+    } else {
+      this.auth.getProfile((err, profile) => {
+        this.profile = profile;
+      });
+    }
   }
 
   toggle() {
@@ -122,5 +134,9 @@ export class ExerciserComponent implements OnInit {
 
   saveWorkout() {
     console.log('save and exit ', new Date());
+    this.workoutService.addWorkout(this.sets, this.profile.nickname, this.name);
+    this.router.navigate([`exercise/`]);
+
+
   }
 }
