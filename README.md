@@ -1,3 +1,20 @@
+"food" is an exercise diary and meal planning web application.
+"food" allows you to search for recipes based on the ingredients you have in your kitchen. 
+It allows you to favourite recipes you like to create youyr own cookbook. 
+It also sends you a shopping list on email if you need it. 
+
+exercise planner
+Make programs and log your workouts and progress
+
+future features:
+graph showing your exercise stats and progress over time. 
+noitification for planned exercise. 
+
+fast fit food
+
+
+# How to start
+
 clone repository.
 
 npm install.
