@@ -7,10 +7,11 @@ const  Mailgun = require('mailgun-js');
 let keys = require('../env.js');
 
 
-// Require AdUnit model in our routes module
+// Require  models in our routes module
 let Review = require('../models/Review');
 let Favourite = require('../models/Favourite');
 let Program = require('../models/Program');
+let Workout = require('../models/Workout');
 
 // Defined store route
 reviewRoutes.route('/add').post(function (req, res) {
@@ -183,7 +184,34 @@ reviewRoutes.route('/getProgram/:id').get(function (req, res) {
   });
 });
 
+// WORKOUT WORKOUT WORKOUT routes
 
+reviewRoutes.route('/addWorkout').post(function (req, res) {
+
+  console.log(req.body)
+  let workout = new Workout(req.body);
+  workout.save()
+    .then(() => {
+      res.status(200).json({'workout': 'workout in added successfully'});
+      console.log("save ",workout )
+
+
+    })
+    .catch(err => {
+      res.status(400).send("unable to save to database");
+    });
+});
+reviewRoutes.route('/getWorkout/:id').get(function (req, res) {
+  console.log('get',req.params.id);
+  Workout.find({author: req.params.id } ,function (err, workouts){
+    if(err){
+      console.log(err);
+    }
+    else {
+      res.json(workouts);
+    }
+  });
+});
 
 
 

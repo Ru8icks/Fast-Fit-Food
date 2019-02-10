@@ -77,6 +77,11 @@ export class ExerciserComponent implements OnInit {
   }
 
   nextExercise() {
+    console.log(this.currentSet)
+    if (this.currentSet.length === 0 ) {
+      console.log('no skipping exercises fatty ')
+      return;
+    }
     console.log(this.sets[this.sets.length - 1], 'dubiduu');
     this.sets[this.sets.length - 1].max = this.max;
     console.log(this.sets);
@@ -116,6 +121,6 @@ export class ExerciserComponent implements OnInit {
   }
 
   saveWorkout() {
-    console.log('save and exit');
+    console.log('save and exit ', new Date());
   }
 }

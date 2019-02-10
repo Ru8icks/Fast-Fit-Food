@@ -23,7 +23,7 @@ export class ProgramService {
       .subscribe(res => console.log('Done ', res));
   }
   getPrograms(id) {
-    console.log('get programs ');
+    console.log('get programs ', id);
     return this
       .http
       .get(`${this.uri}/getPrograms/${id}`);
