@@ -29,6 +29,8 @@ export class ProgramComponent implements OnInit {
   profile;
   name: string;
   filteredOptions: Observable<Exercise[]>;
+  private edit = false;
+  id;
 
   constructor(private programService: ProgramService,
               private auth: AuthService,
@@ -45,7 +47,8 @@ export class ProgramComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       if (params['id']) {
-        console.log('params')
+        console.log('params');
+        this.edit = true;
         this.programService.getProgram(params['id']).subscribe((res  => {
           console.log(Object.values(res));
           console.log(res);
@@ -53,6 +56,8 @@ export class ProgramComponent implements OnInit {
           this.program = res.program;
           // @ts-ignore
           this.nameControl.setValue(res.name);
+          // @ts-ignore
+          this.id = res._id;
 
         }));
       }
@@ -83,7 +88,13 @@ export class ProgramComponent implements OnInit {
 
   saveProgram() {
     console.log('Save program');
-    this.programService.addProgram(this.program, this.profile.nickname, this.nameControl.value);
+    if (this.edit) {
+      this.programService.updateProgram(this.program, this.profile.nickname, this.nameControl.value, this.id);
+      console.log('edit ', this.edit);
+    } else {
+      this.programService.addProgram(this.program, this.profile.nickname, this.nameControl.value);
+      console.log('edit ', this.edit);
+    }
 
   }
 

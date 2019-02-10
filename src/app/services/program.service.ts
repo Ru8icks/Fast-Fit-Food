@@ -29,6 +29,20 @@ export class ProgramService {
       .get(`${this.uri}/getPrograms/${id}`);
   }
 
+  updateProgram(program, nickname , name, id) {
+    console.log('update program')
+    const obj = {
+      program: program,
+      name: name,
+      author: nickname,
+    };
+    this
+      .http
+      .post(`${this.uri}/updateProgram/${id}`, obj)
+      .subscribe(res => console.log('Done'));
+    return this.http.get(`${this.uri}`);
+  }
+
   deleteProgram(id) {
     console.log('del program');
     return this

@@ -184,6 +184,27 @@ reviewRoutes.route('/getProgram/:id').get(function (req, res) {
   });
 });
 
+//  Defined update route
+reviewRoutes.route('/updateProgram/:id').post(function (req, res) {
+  console.log('the update')
+  Program.findById(req.params.id, function(err, program) {
+    if (!program)
+      return next(new Error('Could not load Document'));
+    else {
+      program.program = req.body.program;
+      program.name = req.body.name;
+
+      program.save().then(program => {
+        res.json('Update complete');
+      })
+        .catch(err => {
+          res.status(400).send("unable to update the database");
+        });
+    }
+  });
+});
+
+
 // WORKOUT WORKOUT WORKOUT routes
 
 reviewRoutes.route('/addWorkout').post(function (req, res) {
