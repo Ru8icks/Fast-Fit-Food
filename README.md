@@ -1,17 +1,10 @@
-"food" is an exercise diary and meal planning web application.
-"food" allows you to search for recipes based on the ingredients you have in your kitchen. 
-It allows you to favourite recipes you like to create youyr own cookbook. 
-It also sends you a shopping list on email if you need it. 
+"Fast Fit Food" is an exercise diary and meal planning web application. 
+The exercise planner allows you to make training programs, log your workouts and progress. 
+Instead, in the food section the user can search for recipes based on the ingredients present in the kitchen. The favourite recipes can be saved to create a personal cookbook. The user can send also send a shopping list on email for cases when not all the ingredients are at hand.
 
-exercise planner
-Make programs and log your workouts and progress
-
-future features:
-graph showing your exercise stats and progress over time. 
-noitification for planned exercise. 
-
-fast fit food
-
+Future features:
+- Graph showing your exercise statistics and progress over time. 
+- Notification for planned exercise. 
 
 # How to start
 
@@ -30,8 +23,6 @@ use terminal or git bash and run 'nodemon server' in src folder.
 In order to search for recepies you need an API key from spoonacular.
 
 To send shopping list on email you need an API key from mailgun and add a domain to your mailgun account. 
-
-
 
 
 # Mean
