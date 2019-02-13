@@ -22,4 +22,14 @@ export class EmailService {
       .http
       .get(`${this.uri}/submit/${mail}/${msg}`);
   }
+
+  testMail(mail, msg, time) {
+    console.log('testy mail ');
+    return this
+      .http
+      .get(`${this.uri}/submit/${mail}/${msg}/${time}`);
+  }
 }
+
+
+

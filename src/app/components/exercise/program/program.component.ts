@@ -5,6 +5,10 @@ import {map, startWith} from 'rxjs/operators';
 import {ProgramService} from '../../../services/program.service';
 import {AuthService} from '../../../services/auth.service';
 import {ActivatedRoute} from '@angular/router';
+import schedule from 'node-schedule';
+
+import {EmailService} from '../../../services/email.service';
+
 
 
 export interface Exercise {
@@ -34,7 +38,8 @@ export class ProgramComponent implements OnInit {
 
   constructor(private programService: ProgramService,
               private auth: AuthService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private emailService: EmailService) {
 
     if (this.auth.userProfile) {
       this.profile = this.auth.userProfile;
@@ -99,6 +104,11 @@ export class ProgramComponent implements OnInit {
   }
 
   inputer() {
-    console.log(this.name);
+    console.log('test');
+    const msg = `dont forget today is ${this.nameControl.value} day`;
+    const time = 'test';
+    console.log(msg,  time, this.profile.email);
+    this.emailService.testMail(msg, this.profile.email, time);
+
   }
 }

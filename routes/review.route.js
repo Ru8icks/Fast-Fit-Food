@@ -5,7 +5,7 @@ const reviewRoutes = express.Router();
 
 const  Mailgun = require('mailgun-js');
 let keys = require('../env.js');
-
+let schedule = require('node-schedule');
 
 // Require  models in our routes module
 let Review = require('../models/Review');
@@ -148,6 +148,7 @@ reviewRoutes.route('/getFave/:id').get(function (req, res) {
 //  Defined update route
 reviewRoutes.route('/addProgram').post(function (req, res) {
 
+
   console.log(req.body)
   let program = new Program(req.body);
   program.save()
@@ -279,6 +280,52 @@ reviewRoutes.route('/submit/:mail/:msg').get( function(req,res) {
     }
   });
 });
+
+reviewRoutes.route('/submiter').get( function(req,res) {
+  console.log('the test is here');
+
+  const j = schedule.scheduleJob('52 * * * *', function(){
+    console.log('The answer to life, the universe, and everything!');
+  });
+
+});
+
+reviewRoutes.route('/submit/:mail/:msg/:time').get( function(req,res) {
+  console.log("yourmama");
+
+  //We pass the api_key and domain to the wrapper, or it won't be able to identify + send emails
+  const mailgun = new Mailgun({apiKey: api_key, domain: domain});
+  const data = {
+    //Specify email data
+    from: from_who,
+    //The email to contact
+    to: req.params.mail,
+    //Subject and text data
+    subject: 'Hello from Mailgun',
+    html: decodeURIComponent(req.params.msg)
+  }
+  //Invokes the method to send emails given the above data with the helper library
+  const j = schedule.scheduleJob('30 * * * *', function(){
+    console.log('The answer to life, the universe, and everything!');
+    mailgun.messages().send(data, function (err, body) {
+      //If there is an error, render the error page
+      if (err) {
+
+        console.log("got an error: ", err);
+      }
+      //Else we can greet    and leave
+      else {
+        //Here "submitted.jade" is the view file for this landing page
+        //We pass the variable "email" from the url parameter in an object rendered by Jade
+        res.json(body);
+        console.log(body);
+      }
+    });
+  });
+
+
+});
+
 
 
 
