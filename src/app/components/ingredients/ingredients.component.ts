@@ -29,7 +29,7 @@ export class IngredientsComponent implements OnInit {
   recipesResults;
   cookbook;
   profile;
-  rank: number;
+  rank= 0;
   public searchForm: FormGroup;
 
 
