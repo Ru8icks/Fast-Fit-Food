@@ -1,10 +1,10 @@
 
 import { Component, OnInit } from '@angular/core';
-import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { AdunitService } from '../../services/adunit.service';
 import { FavouritesService } from '../../services/favourites.service';
 import { RecipeService } from '../../services/recipe.service';
-import { FormControl } from '@angular/forms';
+
 import { AuthService } from '../../services/auth.service';
 
 import 'rxjs/add/operator/debounceTime';
@@ -22,7 +22,7 @@ import {ReviewService} from '../../services/review.service';
 export class IngredientsComponent implements OnInit {
 
   angForm: FormGroup;
-  searchTerm: FormControl = new FormControl();
+  searchTerm: FormControl = new FormControl(Validators.required);
   ingredients: String[] = new Array<String>();
 
   searchResult;
@@ -30,6 +30,7 @@ export class IngredientsComponent implements OnInit {
   cookbook;
   profile;
   rank: number;
+  public searchForm: FormGroup;
 
 
 
@@ -38,14 +39,6 @@ export class IngredientsComponent implements OnInit {
               private auth: AuthService,
               private fb: FormBuilder,
               private favouritesService: FavouritesService) {
-    this.searchTerm.valueChanges
-      .debounceTime(400)
-      .subscribe(data => {
-        this.recipeService.getIngredient(data).subscribe(response => {
-          console.log(response);
-          this.searchResult = response;
-        });
-      });
     if (this.auth.userProfile) {
       this.profile = this.auth.userProfile;
       console.log('if ', this.profile);
@@ -60,6 +53,22 @@ export class IngredientsComponent implements OnInit {
 
 
   ngOnInit() {
+    this.searchForm = new FormGroup({
+      searchTerm: new FormControl('', [Validators.required]),
+
+    });
+    this.searchForm.get('searchTerm').valueChanges
+      .debounceTime(400)
+      .subscribe(data => {
+        this.recipeService.getIngredient(data).subscribe(response => {
+          console.log(response);
+          this.searchResult = response;
+        });
+      });
+  }
+  public hasError(controlName: string, errorName: string) {
+    console.log(this.searchForm.controls[controlName].hasError(errorName), controlName, errorName);
+    return this.searchForm.controls[controlName].hasError(errorName);
   }
 
   addIngredient(ingredient) {

@@ -1,18 +1,20 @@
 
 <div class="card">
   <div class="card-body">
-    <form class="example-form">
-      <div class="form-group">
+    <form class="example-form" [formGroup]="searchForm">
+      <div class="form-group"  >
         <mat-form-field class="example-full-width">
-          <input type="text" class="form-control" name="ingredient"  #ingredient  matInput [formControl]="searchTerm" [matAutocomplete]="auto" >
+          <input type="text" class="form-control" name="ingredient"  #ingredient  matInput formControlName="searchTerm" [matAutocomplete]="auto" >
+          <mat-hint align="end">Tell me what you have</mat-hint>
+          <mat-error *ngIf="hasError('searchTerm', 'required')">Ingredient is required</mat-error>
         </mat-form-field>
         <mat-autocomplete #auto="matAutocomplete">
           <mat-option *ngFor="let item of searchResult" [value]="item">
             {{ item }}
           </mat-option>
         </mat-autocomplete>
+        <button (click)="addIngredient(ingredient.value)"  class="btn btn-primary" [disabled]="!searchForm.valid" >Add Ingredient</button>
         <div class="form-group">
-          <button (click)="addIngredient(ingredient.value)"  class="btn btn-primary">Add Ingredient</button>
         </div>
       </div>
     </form>
@@ -29,12 +31,7 @@
     </div>
   </div>
   <div>
-    <label class="form-check-inline">
-      <input class="form-check-input" type="radio" name="rank" [value]="1" [(ngModel)]="rank">Small Shop
-    </label>
-    <label class="form-check-inline">
-      <input class="form-check-input" type="radio" name="rank" [value]="0" [(ngModel)]="rank">Big shop
-    </label>
+
 
   </div>
   <button (click)="searchForRecipes(ingredients)"  class="btn btn-primary">Search for Recipes</button>
