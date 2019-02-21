@@ -67,7 +67,6 @@ export class IngredientsComponent implements OnInit {
       });
   }
   public hasError(controlName: string, errorName: string) {
-    console.log(this.searchForm.controls[controlName].hasError(errorName), controlName, errorName);
     return this.searchForm.controls[controlName].hasError(errorName);
   }
 

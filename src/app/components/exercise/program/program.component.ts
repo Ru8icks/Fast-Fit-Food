@@ -108,7 +108,8 @@ export class ProgramComponent implements OnInit {
     const msg = `dont forget today is ${this.nameControl.value} day`;
     const time = 'test';
     console.log(msg,  time, this.profile.email);
-    this.emailService.testMail(msg, this.profile.email, time);
-
+    this.emailService.testMail(msg, this.profile.email, time).subscribe( res => {
+      console.log(res);
+    });
   }
 }

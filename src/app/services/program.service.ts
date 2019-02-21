@@ -9,7 +9,8 @@ export class ProgramService {
 
   uri = 'http://localhost:4000/reviews';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
 
   addProgram(program, nickname, name) {
@@ -22,6 +23,7 @@ export class ProgramService {
     this.http.post(`${this.uri}/addProgram`, obj)
       .subscribe(res => console.log('Done ', res));
   }
+
   getPrograms(id) {
     console.log('get programs ', id);
     return this
@@ -29,7 +31,7 @@ export class ProgramService {
       .get(`${this.uri}/getPrograms/${id}`);
   }
 
-  updateProgram(program, nickname , name, id) {
+  updateProgram(program, nickname, name, id) {
     console.log('update program')
     const obj = {
       program: program,
@@ -57,4 +59,5 @@ export class ProgramService {
       .http
       .get(`${this.uri}/getProgram/${id}`);
   }
+
 }

@@ -249,6 +249,8 @@ const domain = keys.MGDOMAIN;
 //Your sending email address
 const from_who = 'your@email.com';
 
+
+
 // Send a message to the specified email address when you navigate to /submit/someaddr@email.com
 // The index redirects here
 reviewRoutes.route('/submit/:mail/:msg').get( function(req,res) {
@@ -281,16 +283,8 @@ reviewRoutes.route('/submit/:mail/:msg').get( function(req,res) {
   });
 });
 
-reviewRoutes.route('/submiter').get( function(req,res) {
+reviewRoutes.route('/:mail/:msg/:time').get( function(req,res) {
   console.log('the test is here');
-
-  const j = schedule.scheduleJob('52 * * * *', function(){
-    console.log('The answer to life, the universe, and everything!');
-  });
-
-});
-
-reviewRoutes.route('/submit/:mail/:msg/:time').get( function(req,res) {
   console.log("yourmama");
 
   //We pass the api_key and domain to the wrapper, or it won't be able to identify + send emails

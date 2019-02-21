@@ -27,9 +27,10 @@ export class EmailService {
     console.log('testy mail ');
     return this
       .http
-      .get(`${this.uri}/submit/${mail}/${msg}/${time}`);
+      .get(`${this.uri}/${mail}/${msg}/${time}`);
   }
 }
+
 
 
 
