@@ -19,12 +19,14 @@
 
   <div class="card-body">
     <ul>
-      <li *ngFor="let exercise of program">{{exercise.name}}</li>
+      <li *ngFor="let exercise of program"><div class="card">{{exercise.name}}</div></li>
     </ul>
 
   </div>
+
+
   <button class="btn btn-primary" (click)="saveProgram()">Save</button>
 
 </div>
 
-<button class="btn btn-primary" (click)="inputer()">test</button>
+

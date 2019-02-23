@@ -6,14 +6,14 @@
         <mat-form-field class="example-full-width">
           <input type="text" class="form-control" name="ingredient"  #ingredient  matInput formControlName="searchTerm" [matAutocomplete]="auto" >
           <mat-hint align="end">Tell me what you have</mat-hint>
-          <mat-error *ngIf="hasError('searchTerm', 'required')">Ingredient is required</mat-error>
+          <mat-error *ngIf="hasError('searchTerm', 'required')">Cant add empty ingredient</mat-error>
         </mat-form-field>
         <mat-autocomplete #auto="matAutocomplete">
           <mat-option *ngFor="let item of searchResult" [value]="item">
             {{ item }}
           </mat-option>
         </mat-autocomplete>
-        <button (click)="addIngredient(ingredient.value)"  class="btn btn-primary" [disabled]="!searchForm.valid" >Add Ingredient</button>
+        <button (click)="addIngredient()"  class="btn btn-primary" [disabled]="!searchForm.valid" >Add Ingredient</button>
         <div class="form-group">
         </div>
       </div>

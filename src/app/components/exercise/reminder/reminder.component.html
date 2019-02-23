@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <form [formGroup]="reminderForm">
+        <mat-form-field class="">
+          <mat-select placeholder="Pick a day" formControlName="reminderDay">
+            <mat-option *ngFor="let day of days" [value]="day.value"  (click)="setDay(day.value)">
+              {{day.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+
+
+<div class="row">
+
+  <div class="col" >
+    <button style="width: 3vw" class="btn btn-outline-secondary" type="button"  (click)="incHour()">+</button>
+    <input style="width: 5vw" [(ngModel)]="hour" type="number" class="form-control row" placeholder="" max="23" min="0" >
+    <button style="width: 3vw" class="btn btn-outline-secondary" type="button"  (click)="decHour()">-</button>
+  </div>
+
+  <div class="col">
+    <button style="width: 3vw" class="btn btn-outline-secondary " type="button" (click)="incMin()">+</button>
+    <input style="width: 5vw" [(ngModel)]="min" type="number" class="form-control row" placeholder=""  max="59" min="0">
+    <button style="width: 3vw" class="btn btn-outline-secondary " type="button" (click)="decMin()">-</button>
+  </div>
+
+
+</div>
+
+</div>
+
+<div class="container">
+
+  <button class="btn btn-outline-secondary row" type="button" [disabled]="!reminderForm.valid" (click)="save()">Save Reminder</button>
+</div>
+
+

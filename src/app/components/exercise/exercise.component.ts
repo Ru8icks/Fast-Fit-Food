@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {ProgramService} from '../../services/program.service';
 import {AuthService} from '../../services/auth.service';
 import { ActivatedRoute } from '@angular/router';
+import  {ReminderService} from '../../services/reminder.service';
 
 
 @Component({
@@ -13,10 +14,13 @@ import { ActivatedRoute } from '@angular/router';
 export class ExerciseComponent implements OnInit {
   programs: Array<Object>;
   profile;
+  showModal: boolean;
+  program: string;
 
   constructor(private router: Router,
               private programService: ProgramService,
-              private auth: AuthService) {}
+              private auth: AuthService,
+              private modalService: ReminderService) {}
 
   ngOnInit() {
     if (this.auth.userProfile) {
@@ -30,9 +34,9 @@ export class ExerciseComponent implements OnInit {
         this.getPrograms(this.profile.nickname);
       });
     }
-    // this.profile = this.route.snapshot.data['profile'];
-    // console.log(this.profile.nickname, 'here');
+    this.modalService.currentToggle.subscribe(showModal => this.showModal = showModal);
   }
+
   getPrograms(nick) {
     this.programService.getPrograms(nick).subscribe(res => {
       console.log(res, ' programs');
@@ -54,4 +58,14 @@ export class ExerciseComponent implements OnInit {
   newProgram() {
     this.router.navigate([`program`]);
   }
+
+  toggleModal = () => {
+    this.modalService.toggle();
+  }
+  toggleReminder(prog) {
+    console.log(prog, this.showModal)
+    this.program = prog;
+    this.modalService.toggle();
+  }
+
 }

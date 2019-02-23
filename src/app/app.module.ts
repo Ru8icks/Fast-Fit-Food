@@ -20,7 +20,7 @@ import { AuthGuard } from './auth/auth.guard';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatAutocompleteModule, MatInputModule, MatSelectModule } from '@angular/material';
+import {MatAutocompleteModule, MatDatepickerModule, MatInputModule, MatNativeDateModule, MatSelectModule} from '@angular/material';
 import { RecipesComponent } from './components/recipes/recipes.component';
 
 import {MatCardModule} from '@angular/material/card';
@@ -29,9 +29,10 @@ import { CallbackComponent } from './components/callback/callback.component';
 import { WriteReviewComponent } from './components/write-review/write-review.component';
 import { UserReviewsComponent } from './components/user-reviews/user-reviews.component';
 import { ExerciseComponent } from './components/exercise/exercise.component';
-import { ExerciseResolver } from './components/exercise/exercise.resolver';
 import { ProgramComponent } from './components/exercise/program/program.component';
 import { ExerciserComponent } from './components/exercise/exerciser/exerciser.component';
+import { ReminderComponent } from './components/exercise/reminder/reminder.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 
 
@@ -47,6 +48,8 @@ import { ExerciserComponent } from './components/exercise/exerciser/exerciser.co
     ExerciseComponent,
     ProgramComponent,
     ExerciserComponent,
+    ReminderComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +63,8 @@ import { ExerciserComponent } from './components/exercise/exerciser/exerciser.co
     FormsModule,
     MatSelectModule,
     MatCardModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
   ],
   providers: [
     AdunitService,
@@ -67,7 +72,6 @@ import { ExerciserComponent } from './components/exercise/exerciser/exerciser.co
     AuthService,
     FavouritesService,
     RecipeService,
-    ExerciseResolver,
 
   ],
   bootstrap: [AppComponent]

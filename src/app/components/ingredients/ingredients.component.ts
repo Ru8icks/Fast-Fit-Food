@@ -24,12 +24,11 @@ export class IngredientsComponent implements OnInit {
   angForm: FormGroup;
   searchTerm: FormControl = new FormControl(Validators.required);
   ingredients: String[] = new Array<String>();
-
   searchResult;
   recipesResults;
   cookbook;
   profile;
-  rank= 0;
+  rank = 0;
   public searchForm: FormGroup;
 
 
@@ -70,10 +69,9 @@ export class IngredientsComponent implements OnInit {
     return this.searchForm.controls[controlName].hasError(errorName);
   }
 
-  addIngredient(ingredient) {
-    console.log(ingredient);
-    this.ingredients.push(ingredient.trim());
-    this.searchTerm.setValue('');
+  addIngredient() {
+    this.ingredients.push(this.searchForm.get('searchTerm').value.trim());
+    this.searchForm.get('searchTerm').setValue('');
     return;
   }
   removeIngredient(ingredient) {

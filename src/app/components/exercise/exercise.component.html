@@ -9,6 +9,7 @@
           <li *ngFor="let program of programs">
             {{program.name}}<button class="btn btn-primary" (click)="exercise(program._id)">Exercise</button>
             <button class="btn btn-outline-danger" (click)="edit(program._id)">Edit</button>
+            <button class="btn btn-outline-success" (click)="toggleReminder(program.name)">Edit</button>
 
           </li>
         </ul>
@@ -17,3 +18,21 @@
   </div>
   <button class="btn btn-primary" (click)="newProgram()">New Program</button>
 </div>
+
+
+
+
+
+
+
+  <app-modal
+    [show]="showModal"
+
+    [closeCallback]="toggleModal"
+  >
+    <h3>Set reminder for {{program}}</h3>
+
+
+    <app-reminder [name]="program"></app-reminder>
+  </app-modal>
+

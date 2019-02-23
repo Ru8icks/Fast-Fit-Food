@@ -23,11 +23,10 @@ export class EmailService {
       .get(`${this.uri}/submit/${mail}/${msg}`);
   }
 
-  testMail(mail, msg, time) {
+  testMail(reminderObj) {
     console.log('testy mail ');
-    return this
-      .http
-      .get(`${this.uri}/${mail}/${msg}/${time}`);
+    this.http.post(`${this.uri}/addReminder`, reminderObj)
+      .subscribe(res => console.log('Done ', res));
   }
 }
 

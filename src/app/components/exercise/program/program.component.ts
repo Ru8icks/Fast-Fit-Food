@@ -7,6 +7,7 @@ import {AuthService} from '../../../services/auth.service';
 import {ActivatedRoute} from '@angular/router';
 import schedule from 'node-schedule';
 
+
 import {EmailService} from '../../../services/email.service';
 
 
@@ -35,6 +36,7 @@ export class ProgramComponent implements OnInit {
   filteredOptions: Observable<Exercise[]>;
   private edit = false;
   id;
+
 
   constructor(private programService: ProgramService,
               private auth: AuthService,
@@ -103,13 +105,5 @@ export class ProgramComponent implements OnInit {
 
   }
 
-  inputer() {
-    console.log('test');
-    const msg = `dont forget today is ${this.nameControl.value} day`;
-    const time = 'test';
-    console.log(msg,  time, this.profile.email);
-    this.emailService.testMail(msg, this.profile.email, time).subscribe( res => {
-      console.log(res);
-    });
-  }
+
 }
