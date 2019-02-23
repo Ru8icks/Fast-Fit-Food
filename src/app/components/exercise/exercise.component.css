@@ -26,3 +26,23 @@
   width:  100%;
   height: 100%;
 }
+.container {
+  display: flex; /* or inline-flex */
+  justify-content: flex-end;
+  flex-direction: column;
+  align-items: stretch;
+
+
+
+
+}
+
+.item {
+
+
+}
+.item p {
+
+  flex-grow: 3;
+  ;
+}

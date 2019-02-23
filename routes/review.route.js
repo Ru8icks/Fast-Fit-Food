@@ -286,7 +286,9 @@ reviewRoutes.route('/submit/:mail/:msg').get( function(req,res) {
 reviewRoutes.route('/addReminder').post( function(req,res) {
   console.log('the test is here');
   console.log("yourmama");
-  console.log(req.body)
+
+  let reminder =req.body;
+  const reminderString =  (reminder.min +' '+ reminder.hour+ ' * * '+reminder.day);
 
   //We pass the api_key and domain to the wrapper, or it won't be able to identify + send emails
   const mailgun = new Mailgun({apiKey: api_key, domain: domain});
@@ -294,16 +296,16 @@ reviewRoutes.route('/addReminder').post( function(req,res) {
     //Specify email data
     from: from_who,
     //The email to contact
-    to: req.params.mail,
+    to: reminder.mail,
     //Subject and text data
-    subject: 'Hello from Mailgun',
-    html: decodeURIComponent(req.params.msg)
+    subject: 'Message from the past',
+    html: decodeURIComponent(reminder.msg)
   }
   //Invokes the method to send emails given the above data with the helper library
 
 
 
-  schedule.scheduleJob('30 * * * *', function(){
+  schedule.scheduleJob(reminderString , function(){
     console.log('The answer to life, the universe, and everything!');
     mailgun.messages().send(data, function (err, body) {
       //If there is an error, render the error page

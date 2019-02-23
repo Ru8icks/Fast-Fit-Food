@@ -1,21 +1,41 @@
 <div class="card">
-  <div class="card-body">
-    <h3>
-      Programs
-    </h3>
-    <div class="card">
-      <div class="card-body">
-        <ul>
-          <li *ngFor="let program of programs">
-            {{program.name}}<button class="btn btn-primary" (click)="exercise(program._id)">Exercise</button>
-            <button class="btn btn-outline-danger" (click)="edit(program._id)">Edit</button>
-            <button class="btn btn-outline-success" (click)="toggleReminder(program.name)">Edit</button>
 
-          </li>
-        </ul>
+  <h3 class="card-header container">Programs</h3>
+  <div class="card-body">
+
+
+
+
+
+    <div class="container">
+      <div *ngFor="let program of programs" class="item">
+
+        <div class="row">
+
+          <p>{{program.name}}</p>
+          <button class="btn btn-primary" (click)="exercise(program._id)">Exercise</button>
+          <button class="btn btn-outline-danger" (click)="edit(program._id)">Edit</button>
+          <button class="btn btn-outline-success" (click)="toggleReminder(program.name)">Edit</button>
+
+        </div>
       </div>
     </div>
   </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <button class="btn btn-primary" (click)="newProgram()">New Program</button>
 </div>
 

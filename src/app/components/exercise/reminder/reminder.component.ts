@@ -26,7 +26,6 @@ export class ReminderComponent implements OnInit {
   min = 0;
   day: number;
   reminderForm: FormGroup;
-  reminderDay:  FormControl = new FormControl(Validators.required);
 
 
   @Input()
@@ -56,9 +55,7 @@ export class ReminderComponent implements OnInit {
     });
   }
 
-  public hasError(controlName: string, errorName: string) {
-    return this.reminderForm.controls[controlName].hasError(errorName);
-  }
+
 
 
   decHour() {
@@ -93,7 +90,7 @@ export class ReminderComponent implements OnInit {
 
   save() {
     console.log('test');
-    const msg = 'dont forget today ' + this.name;
+    const msg = 'dont forget today is ' + this.name + ' day. You said you would workout today';
     const time = {
       hour: this.hour,
       min: this.min,
