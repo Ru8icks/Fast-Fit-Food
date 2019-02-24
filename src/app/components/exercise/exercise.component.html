@@ -1,6 +1,11 @@
 <div class="card">
+  <div class="card-header">
 
-  <h3 class="card-header container">Programs</h3>
+
+      <h3>Programs</h3>
+
+
+  </div>
   <div class="card-body">
 
 
@@ -12,7 +17,7 @@
 
         <div class="row">
 
-          <p>{{program.name}}</p>
+          <button class="grow btn btn-outline-dark" [disabled]="true"><mat-icon svgIcon="file-document-box-outline"></mat-icon>{{program.name}}</button>
           <button class="btn btn-outline-success" (click)="exercise(program._id)"><mat-icon svgIcon="dumbbell"></mat-icon></button>
           <button class="btn btn-outline-info" (click)="edit(program._id)"><mat-icon svgIcon="playlist-edit"></mat-icon></button>
           <button class="btn btn-outline-warning" (click)="toggleReminder(program.name)"><mat-icon svgIcon="alarm"></mat-icon></button>
@@ -48,9 +53,16 @@
 
     [closeCallback]="toggleModal"
   >
-    <h3>Set reminder for {{program}}</h3>
+    <div class="card card-header" >
 
 
-    <app-reminder [name]="program"></app-reminder>
+        <h3   class="row" style="align-self: center"   >Set reminder for {{program}}</h3>
+
+
+
+      <app-reminder [name]="program"></app-reminder>
+    </div>
+
+
   </app-modal>
 

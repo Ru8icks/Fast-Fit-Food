@@ -1,17 +1,15 @@
-<p>
-  exerciser works!
-</p>
+
 <div class="container">
   <div class="card">
-    <div class="card-body">
+    <h3 *ngIf="!done" class="card-header">{{name}}</h3>
 
 
-      <h3 class="card-title">{{name}}</h3>
-      <h6 class="card-title">{{currentEx}}</h6>
+    <div *ngIf="!done" class="card-body">
+
+
+      <h1 class="card-title">{{currentEx}}</h1>
 
       <div class="input-group mb-3">
-
-
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon1">Repetitions:</span>
           <button class="btn btn-outline-secondary" type="button" id="button-minus" (click)="decReps()">-</button>
@@ -20,40 +18,42 @@
         <div class="input-group-append">
           <button class="btn btn-outline-secondary" type="button" id="button-add" (click)="incReps()">+</button>
         </div>
-
-
-
-
         <div class="input-group mb-3">
-
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon2" (click)="toggle()">{{type}}:</span>
-
             <button class="btn btn-outline-secondary" type="button" id="button-minus2" (click)="decWeight()">-</button>
           </div>
           <input [(ngModel)]="weight" type="number" class="form-control" placeholder="" aria-label="reps" aria-describedby="button-addon1">
           <div class="input-group-append">
             <button class="btn btn-outline-secondary" type="button" id="button-add2" (click)="incWeight()">+</button>
           </div>
-
       </div>
         <button class="btn btn-secondary" type="button" (click)="addSet()" >Add Set</button>
-
-
     </div>
   </div>
 
-    <div class="card">
 
+
+    <div class="card" *ngIf="!done">
+      <h3 class="card-header">Completed sets</h3>
       <div class="card-body">
-        <ul>
-          <li *ngFor="let set of currentSet">{{set.set.reps}} x {{set.set.weight}}</li>
-        </ul>
-        <button *ngIf="!done" class="btn btn-secondary" type="button" (click)="nextExercise()" >Next Exercise</button>
-        <button *ngIf="done" class="btn btn-secondary" type="button" (click)="saveWorkout()" >Save and Exit</button>
-
+        <div class="container">
+            <div  class="grow" *ngFor="let set of currentSet">
+              <button class="btn btn-outline-dark grow" [disabled]="true"><mat-icon svgIcon="emoticon-excited-outline"></mat-icon>   {{set.set.reps}} x {{set.set.weight}}</button>
+            </div>
+        </div>
       </div>
+      <button *ngIf="!done" class="btn btn-secondary" type="button" (click)="nextExercise()" >Next Exercise</button>
     </div>
 
-  </div>0
+  </div>
+  <div class="card" *ngIf="done">
+    <h3 class="card-header">Congratulations!</h3>
+    <div class="card-body">
+      <p> You completed your {{name}} program!</p>
+    </div>
+
+    <button *ngIf="done" class="btn btn-secondary" type="button" (click)="saveWorkout()" >Save and Exit</button>
+  </div>
 </div>
+

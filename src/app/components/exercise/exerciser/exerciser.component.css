@@ -4,3 +4,26 @@ input {
   flex: 0 0 auto !important; /* dirty fix*/
 
 }
+.item {
+  padding-right: 5vw;
+  margin-bottom: 1vh;
+
+
+
+}
+.grow {
+  flex-grow: 3;
+  padding-left: 2vw;
+  padding-right: 2vw;
+
+  text-align: left;
+  color: black;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-radius: 0%;
+
+
+
+
+}

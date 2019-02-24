@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {ProgramService} from '../../services/program.service';
 import {AuthService} from '../../services/auth.service';
 import { ActivatedRoute } from '@angular/router';
-import  {ReminderService} from '../../services/reminder.service';
+import {ReminderService} from '../../services/reminder.service';
 
 
 @Component({
@@ -23,17 +23,7 @@ export class ExerciseComponent implements OnInit {
               private modalService: ReminderService) {}
 
   ngOnInit() {
-    if (this.auth.userProfile) {
-      this.profile = this.auth.userProfile;
-      console.log('if ', this.profile);
-      this.getPrograms(this.profile.nickname);
-    } else {
-      this.auth.getProfile((err, profile) => {
-        this.profile = profile;
-        console.log(this.profile, 'else');
-        this.getPrograms(this.profile.nickname);
-      });
-    }
+    this.getProfile();
     this.modalService.currentToggle.subscribe(showModal => this.showModal = showModal);
   }
 
@@ -68,10 +58,25 @@ export class ExerciseComponent implements OnInit {
   toggleModal = () => {
     this.modalService.toggle();
   }
+
   toggleReminder(prog) {
     console.log(prog, this.showModal);
     this.program = prog;
     this.modalService.toggle();
+  }
+
+  getProfile() {
+    if (this.auth.userProfile) {
+      this.profile = this.auth.userProfile;
+      console.log('if ', this.profile);
+      this.getPrograms(this.profile.nickname);
+    } else {
+      this.auth.getProfile((err, profile) => {
+        this.profile = profile;
+        console.log(this.profile, 'else');
+        this.getPrograms(this.profile.nickname);
+      });
+    }
   }
 
 }

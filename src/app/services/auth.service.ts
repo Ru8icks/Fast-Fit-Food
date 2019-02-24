@@ -17,11 +17,14 @@ export class AuthService {
     scope: 'openid email profile'
   });
   userProfile: any;
+  private profileSource = new BehaviorSubject<object>(this.userProfile);
+  currentProfile = this.profileSource.asObservable();
 
-  constructor(public router: Router) {}
+  constructor(public router: Router) { }
 
   public login(): void {
     this.auth0.authorize();
+
 
   }
   public handleAuthentication(): void {
@@ -74,20 +77,6 @@ export class AuthService {
         self.userProfile = profile;
       }
       cb(err, profile);
-    });
-  }
-  public getProfiled(): void {
-    const accessToken = localStorage.getItem('access_token');
-    if (!accessToken) {
-      throw new Error('Access Token must exist to fetch profile');
-    }
-
-    const self = this;
-    this.auth0.client.userInfo(accessToken, (err, profile) => {
-      if (profile) {
-        self.userProfile = profile;
-      }
-       return profile;
     });
   }
 

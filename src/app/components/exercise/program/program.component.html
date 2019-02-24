@@ -1,16 +1,16 @@
-<p>
-  program works!
-</p>
+
+
 <div class="card">
+  <h3 class="card-header">Program</h3>
 
 <form class="example-form" [formGroup]="programForm">
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="Title"  formControlName="title"   autocomplete="off" >
+    <input matInput placeholder="Title"    [formControl]="nameControl" autocomplete="off" >
   </mat-form-field>
   <mat-form-field class="example-full-width">
     <input type="text" placeholder="Exercise" aria-label="Exercise" matInput  [formControl]="myControl" [matAutocomplete]="auto">
     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option.name">
         {{option.name}}
       </mat-option>
     </mat-autocomplete>
@@ -18,17 +18,20 @@
 </form>
   <button class="btn btn-primary" (click)="addExercise()" [disabled]="!myControl.value">+Add to program</button>
   <div class="card-body">
-
     <div class="container">
-      <div *ngFor="let exercise of program">{{exercise.name}}</div>
+      <div class="item" *ngFor="let exercise of program">
+        <div class="row">
+        <button class="grow btn btn-outline-dark" [disabled]="true"><mat-icon svgIcon="dumbbell"></mat-icon>{{exercise.name}}</button>
+        <button class="btn btn-outline-danger" (click)="deleteExercise(exercise.name)"><mat-icon svgIcon="delete"></mat-icon></button>
+        </div>
+      </div>
     </div>
-
   </div>
 
+  <a routerLink="exercise" class="nav-link" routerLinkActive="active"></a>
+    <button class="btn btn-primary" (click)="saveProgram()" [disabled]="!isProgramValid()" >Save</button>
 
 
-  <button class="btn btn-primary" (click)="saveProgram()" [disabled]="!isProgramValid()" >Save</button>
+
 
 </div>
-
-

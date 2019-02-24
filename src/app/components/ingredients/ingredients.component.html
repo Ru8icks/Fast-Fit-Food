@@ -1,6 +1,9 @@
 
 <div class="card">
-  <div class="card-body">
+  <div class="card-header">
+    <h3>Cooking</h3>
+  </div>
+  <div class="card-body container">
     <form class="example-form" [formGroup]="searchForm">
       <div class="form-group"  >
         <mat-form-field class="example-full-width">
@@ -13,28 +16,30 @@
             {{ item }}
           </mat-option>
         </mat-autocomplete>
-        <button (click)="addIngredient()"  class="btn btn-primary" [disabled]="!searchForm.valid" >Add Ingredient</button>
-        <div class="form-group">
-        </div>
+
+        <button (click)="addIngredient()"  class="btn btn-primary " [disabled]="!searchForm.valid" >Add Ingredient</button>
       </div>
     </form>
   </div>
-</div>
 
-<div class="card" *ngIf="ingredients.length>0">
+
+
   <div class="card-body">
-    <h3>Ingredients</h3>
-    <div *ngFor="let item of ingredients" >
-      <h4>{{item}}</h4>
-      <button (click)="removeIngredient(item)"  class="btn btn-danger">Remove Ingredient</button>
 
+    <div *ngFor="let item of ingredients" class="item">
+      <div class="row">
+        <button class="grow btn btn-outline-dark" [disabled]="true"><mat-icon svgIcon="food-apple-outline"></mat-icon>{{item}}</button>
+        <button (click)="removeIngredient(item)"  class="btn btn-outline-danger"><mat-icon svgIcon="delete"></mat-icon></button>
+      </div>
     </div>
+
   </div>
+
   <div>
 
 
   </div>
-  <button (click)="searchForRecipes(ingredients)"  class="btn btn-primary">Search for Recipes</button>
+  <button (click)="searchForRecipes(ingredients)" [disabled]="ingredients.length<1" class="btn btn-primary">Search for Recipes</button>
 
 
 </div>
@@ -43,9 +48,16 @@
 
 </app-recipes>
 
-<button (click)="getCookBook()"  class="btn btn-primary">Open Cookbook</button>
-<app-recipes *ngFor="let recipe of cookbook" [recipe]="recipe">
+<div class="card">
+  <h4 class="card-header">
+    Cookbook
+  </h4>
+
+  <button (click)="getCookBook()"  class="btn btn-outline-primary">Toggle Cookbook</button>
+
+  <app-recipes *ngFor="let recipe of cookbook" [recipe]="recipe">
 
 
-</app-recipes>
+  </app-recipes>
+</div>
 

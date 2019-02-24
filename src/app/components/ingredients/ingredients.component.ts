@@ -23,7 +23,7 @@ export class IngredientsComponent implements OnInit {
 
   angForm: FormGroup;
   searchTerm: FormControl = new FormControl(Validators.required);
-  ingredients: String[] = new Array<String>();
+  ingredients: String[] = [];
   searchResult;
   recipesResults;
   cookbook;

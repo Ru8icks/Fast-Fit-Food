@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {ProgramService} from '../../../services/program.service';
 import {AuthService} from '../../../services/auth.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import schedule from 'node-schedule';
 
 
@@ -24,7 +24,7 @@ export interface Exercise {
 })
 export class ProgramComponent implements OnInit {
   myControl = new FormControl();
-  nameControl = new FormControl();
+  nameControl = new FormControl('', [Validators.required]);
   options: Exercise[] = [
     {name: 'Bench Press'},
     {name: 'Squats'},
@@ -37,23 +37,15 @@ export class ProgramComponent implements OnInit {
   private edit = false;
   id;
   programForm: FormGroup;
-  title = new FormControl('', [Validators.required]);
-  exercise =  new FormControl('', [Validators.required]);
 
   constructor(private programService: ProgramService,
               private auth: AuthService,
               private route: ActivatedRoute,
-              private emailService: EmailService) {
+              private router: Router,
+              ) {  }
 
-    if (this.auth.userProfile) {
-      this.profile = this.auth.userProfile;
-    } else {
-      this.auth.getProfile((err, profile) => {
-        this.profile = profile;
-      });
-    }
-  }
   ngOnInit() {
+    this.getProfile();
     this.route.params.subscribe(params => {
       if (params['id']) {
         console.log('params');
@@ -64,7 +56,8 @@ export class ProgramComponent implements OnInit {
           // @ts-ignore
           this.program = res.program;
           // @ts-ignore
-          this.title.setValue(res.name);
+          this.nameControl.setValue(res.name);
+          console.log(this.nameControl.value);
           // @ts-ignore
           this.id = res._id;
 
@@ -78,7 +71,7 @@ export class ProgramComponent implements OnInit {
         map(name => name ? this._filter(name) : this.options.slice())
       );
     this.programForm = new FormGroup({
-      title: new FormControl('', [Validators.required]),
+      nameControl: new FormControl('', [Validators.required]),
     });
   }
 
@@ -86,7 +79,7 @@ export class ProgramComponent implements OnInit {
     return exercise ? exercise.name : undefined;
   }
   isProgramValid() {
-    if (this.program.length > 0 && this.programForm.valid) {
+    if (this.program.length > 0 && this.nameControl.valid) {
       return true;
     }
     return false;
@@ -99,22 +92,39 @@ export class ProgramComponent implements OnInit {
   }
 
   addExercise() {
-    console.log(this.myControl.value)
-    this.program.push(this.myControl.value);
+    console.log(this.myControl.value);
+    this.program.push({name: this.myControl.value});
     this.myControl.setValue('');
+    console.log(this.program);
+
   }
 
   saveProgram() {
-    console.log('Save program');
+    console.log('Save program', this.program, this.profile.nickname, this.nameControl.value, this.id);
+
     if (this.edit) {
-      this.programService.updateProgram(this.program, this.profile.nickname, this.title.value, this.id);
+      this.programService.updateProgram(this.program, this.profile.nickname, this.nameControl.value, this.id);
       console.log('edit ', this.edit);
     } else {
-      this.programService.addProgram(this.program, this.profile.nickname, this.title.value);
+      this.programService.addProgram(this.program, this.profile.nickname, this.nameControl.value);
       console.log('edit ', this.edit);
     }
+    this.router.navigate([`exercise/`]);
 
   }
 
+  getProfile() {
+    if (this.auth.userProfile) {
+      this.profile = this.auth.userProfile;
+    } else {
+      this.auth.getProfile((err, profile) => {
+        this.profile = profile;
+      });
+    }
+  }
 
+
+  deleteExercise(name: string) {
+    this.program = this.program.filter(exercise => exercise.name !== name);
+  }
 }
