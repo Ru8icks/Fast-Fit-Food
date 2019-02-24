@@ -33,6 +33,9 @@ import { ProgramComponent } from './components/exercise/program/program.componen
 import { ExerciserComponent } from './components/exercise/exerciser/exerciser.component';
 import { ReminderComponent } from './components/exercise/reminder/reminder.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { MatIconRegistry, MatIconModule } from '@angular/material';
+import {DomSanitizer} from '@angular/platform-browser';
+
 
 
 
@@ -65,6 +68,7 @@ import { ModalComponent } from './components/modal/modal.component';
     MatCardModule,
     MatNativeDateModule,
     MatDatepickerModule,
+    MatIconModule
   ],
   providers: [
     AdunitService,
@@ -76,4 +80,8 @@ import { ModalComponent } from './components/modal/modal.component';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(matIconRegistry: MatIconRegistry, domSanitizer: DomSanitizer){
+    matIconRegistry.addSvgIconSet(domSanitizer.bypassSecurityTrustResourceUrl('./assets/mdi.svg'));
+  }
+}

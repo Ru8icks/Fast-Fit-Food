@@ -2,12 +2,13 @@
   program works!
 </p>
 <div class="card">
-<form class="example-form">
+
+<form class="example-form" [formGroup]="programForm">
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="Title"   [formControl]="nameControl">
+    <input matInput placeholder="Title"  formControlName="title"   autocomplete="off" >
   </mat-form-field>
   <mat-form-field class="example-full-width">
-    <input type="text" placeholder="Exercise" aria-label="Exercise" matInput [formControl]="myControl" [matAutocomplete]="auto">
+    <input type="text" placeholder="Exercise" aria-label="Exercise" matInput  [formControl]="myControl" [matAutocomplete]="auto">
     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
       <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
         {{option.name}}
@@ -15,17 +16,18 @@
     </mat-autocomplete>
   </mat-form-field>
 </form>
-  <button class="btn btn-primary" (click)="addExercise()">+Add to program</button>
-
+  <button class="btn btn-primary" (click)="addExercise()" [disabled]="!myControl.value">+Add to program</button>
   <div class="card-body">
-    <ul>
-      <li *ngFor="let exercise of program"><div class="card">{{exercise.name}}</div></li>
-    </ul>
+
+    <div class="container">
+      <div *ngFor="let exercise of program">{{exercise.name}}</div>
+    </div>
 
   </div>
 
 
-  <button class="btn btn-primary" (click)="saveProgram()">Save</button>
+
+  <button class="btn btn-primary" (click)="saveProgram()" [disabled]="!isProgramValid()" >Save</button>
 
 </div>
 

@@ -13,18 +13,16 @@
         <div class="row">
 
           <p>{{program.name}}</p>
-          <button class="btn btn-primary" (click)="exercise(program._id)">Exercise</button>
-          <button class="btn btn-outline-danger" (click)="edit(program._id)">Edit</button>
-          <button class="btn btn-outline-success" (click)="toggleReminder(program.name)">Edit</button>
+          <button class="btn btn-outline-success" (click)="exercise(program._id)"><mat-icon svgIcon="dumbbell"></mat-icon></button>
+          <button class="btn btn-outline-info" (click)="edit(program._id)"><mat-icon svgIcon="playlist-edit"></mat-icon></button>
+          <button class="btn btn-outline-warning" (click)="toggleReminder(program.name)"><mat-icon svgIcon="alarm"></mat-icon></button>
+          <button class="btn btn-outline-danger" (click)="deleteProgram(program._id)"><mat-icon svgIcon="delete"></mat-icon></button>
+
 
         </div>
       </div>
     </div>
   </div>
-
-
-
-
 
 
 

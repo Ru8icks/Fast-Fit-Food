@@ -76,9 +76,9 @@ reviewRoutes.route('/update/:id').post(function (req, res) {
 });
 
 // Defined delete | remove | destroy route
-reviewRoutes.route('/delete/:id').get(function (req, res) {
+reviewRoutes.route('/deleteProgram/:id').get(function (req, res) {
   console.log('del del id')
-  Review.find({_id: req.params.id}, function(err, review){
+  Review.remove({_id: req.params.id}, function(err, review){
     if(err) res.json(err);
     else res.json('Successfully removed');
   });

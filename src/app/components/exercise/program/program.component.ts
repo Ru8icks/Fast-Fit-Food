@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {ProgramService} from '../../../services/program.service';
@@ -36,7 +36,9 @@ export class ProgramComponent implements OnInit {
   filteredOptions: Observable<Exercise[]>;
   private edit = false;
   id;
-
+  programForm: FormGroup;
+  title = new FormControl('', [Validators.required]);
+  exercise =  new FormControl('', [Validators.required]);
 
   constructor(private programService: ProgramService,
               private auth: AuthService,
@@ -62,7 +64,7 @@ export class ProgramComponent implements OnInit {
           // @ts-ignore
           this.program = res.program;
           // @ts-ignore
-          this.nameControl.setValue(res.name);
+          this.title.setValue(res.name);
           // @ts-ignore
           this.id = res._id;
 
@@ -75,10 +77,19 @@ export class ProgramComponent implements OnInit {
         map(value => typeof value === 'string' ? value : value.name),
         map(name => name ? this._filter(name) : this.options.slice())
       );
+    this.programForm = new FormGroup({
+      title: new FormControl('', [Validators.required]),
+    });
   }
 
   displayFn(exercise ?: Exercise): string | undefined {
     return exercise ? exercise.name : undefined;
+  }
+  isProgramValid() {
+    if (this.program.length > 0 && this.programForm.valid) {
+      return true;
+    }
+    return false;
   }
 
   private _filter(name: string): Exercise[] {
@@ -96,10 +107,10 @@ export class ProgramComponent implements OnInit {
   saveProgram() {
     console.log('Save program');
     if (this.edit) {
-      this.programService.updateProgram(this.program, this.profile.nickname, this.nameControl.value, this.id);
+      this.programService.updateProgram(this.program, this.profile.nickname, this.title.value, this.id);
       console.log('edit ', this.edit);
     } else {
-      this.programService.addProgram(this.program, this.profile.nickname, this.nameControl.value);
+      this.programService.addProgram(this.program, this.profile.nickname, this.title.value);
       console.log('edit ', this.edit);
     }
 

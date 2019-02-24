@@ -58,12 +58,18 @@ export class ExerciseComponent implements OnInit {
   newProgram() {
     this.router.navigate([`program`]);
   }
+  deleteProgram(id) {
+    this.programService.deleteProgram(id);
+    console.log(this.programs);
+    // @ts-ignore
+    this.programs = this.programs.filter(program => program._id !== id);
+  }
 
   toggleModal = () => {
     this.modalService.toggle();
   }
   toggleReminder(prog) {
-    console.log(prog, this.showModal)
+    console.log(prog, this.showModal);
     this.program = prog;
     this.modalService.toggle();
   }
