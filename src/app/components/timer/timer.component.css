@@ -1,0 +1,19 @@
+
+.grow {
+  flex-grow: 2;
+
+
+
+
+
+
+}
+
+.test {
+  display: flex; /* or inline-flex */
+  justify-content: flex-end;
+  flex-direction: row-reverse;
+  align-items: stretch;
+  margin-top: 2vh;
+
+}

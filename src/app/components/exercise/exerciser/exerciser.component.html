@@ -34,6 +34,8 @@
 
 
 
+
+
     <div class="card" *ngIf="!done">
       <h3 class="card-header">Completed sets</h3>
       <div class="card-body">
@@ -55,5 +57,15 @@
 
     <button *ngIf="done" class="btn btn-secondary" type="button" (click)="saveWorkout()" >Save and Exit</button>
   </div>
+
+
+
+
+
+
+
+  <app-timer class="card">
+
+  </app-timer>
 </div>
 

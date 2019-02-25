@@ -1,0 +1,16 @@
+
+<p class="card-header" style="text-align: center">Timer:</p>
+<div class="test">
+
+
+
+  <button class="btn btn-outline-dark col" (click)='add()' [disabled]="on"><mat-icon svgIcon="plus"></mat-icon></button>
+
+  <button class="grow btn btn-outline-dark" (click)='startTimer()' *ngIf="!on"><mat-icon svgIcon="alarm"></mat-icon>{{timeLeft}}</button>
+
+  <button class="grow btn btn-outline-dark"(click)='pauseTimer()' *ngIf="on"><mat-icon svgIcon="alarm"></mat-icon>{{timeLeft}}</button>
+
+  <button class="btn btn-outline-dark col" (click)='sub()' [disabled]="on"><mat-icon svgIcon="minus"></mat-icon></button>
+
+</div>
+

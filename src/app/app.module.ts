@@ -35,6 +35,7 @@ import { ReminderComponent } from './components/exercise/reminder/reminder.compo
 import { ModalComponent } from './components/modal/modal.component';
 import { MatIconRegistry, MatIconModule } from '@angular/material';
 import {DomSanitizer} from '@angular/platform-browser';
+import { TimerComponent } from './components/timer/timer.component';
 
 
 
@@ -53,6 +54,7 @@ import {DomSanitizer} from '@angular/platform-browser';
     ExerciserComponent,
     ReminderComponent,
     ModalComponent,
+    TimerComponent,
   ],
   imports: [
     BrowserModule,
