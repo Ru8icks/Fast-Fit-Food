@@ -36,6 +36,10 @@ import { ModalComponent } from './components/modal/modal.component';
 import { MatIconRegistry, MatIconModule } from '@angular/material';
 import {DomSanitizer} from '@angular/platform-browser';
 import { TimerComponent } from './components/timer/timer.component';
+import { GraphComponent } from './components/graph/graph.component';
+
+
+import { ChartsModule } from 'ng2-charts';
 
 
 
@@ -55,6 +59,7 @@ import { TimerComponent } from './components/timer/timer.component';
     ReminderComponent,
     ModalComponent,
     TimerComponent,
+    GraphComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,7 +75,8 @@ import { TimerComponent } from './components/timer/timer.component';
     MatCardModule,
     MatNativeDateModule,
     MatDatepickerModule,
-    MatIconModule
+    MatIconModule,
+    ChartsModule,
   ],
   providers: [
     AdunitService,
