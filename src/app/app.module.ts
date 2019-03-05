@@ -39,7 +39,7 @@ import { TimerComponent } from './components/timer/timer.component';
 import { GraphComponent } from './components/graph/graph.component';
 
 
-import { ChartsModule } from 'ng2-charts';
+
 
 
 
@@ -76,7 +76,7 @@ import { ChartsModule } from 'ng2-charts';
     MatNativeDateModule,
     MatDatepickerModule,
     MatIconModule,
-    ChartsModule,
+    
   ],
   providers: [
     AdunitService,
