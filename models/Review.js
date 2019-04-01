@@ -13,7 +13,7 @@ let Review = new Schema({
   rating: {
     type: Number
   },
-  author: {
+  reviewAuthor: {
     type: String
   },
   reviewId: {

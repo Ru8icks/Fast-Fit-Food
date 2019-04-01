@@ -12,7 +12,7 @@ let Workout = new Schema({
   programName: {
     type: String
   },
-  author: {
+  workoutAuthor: {
     type: String
   },
   date: {

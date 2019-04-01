@@ -133,7 +133,7 @@ export class ExerciserComponent implements OnInit {
   }
 
   saveWorkout() {
-    console.log('save and exit ', new Date());
+    console.log('save and exit ', this.sets, this.profile.nickname, this.name);
     this.workoutService.addWorkout(this.sets, this.profile.nickname, this.name);
     this.router.navigate([`exercise/`]);
 

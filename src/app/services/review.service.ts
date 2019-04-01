@@ -16,7 +16,7 @@ export class ReviewService {
       title: title,
       review: review,
       rating: rating,
-      author: author,
+      reviewAuthor: author,
       reviewId: recipeId,
     };
     this.http.post(`${this.uri}/add`, obj)
@@ -40,7 +40,7 @@ export class ReviewService {
       title: title,
       review: review,
       rating: rating,
-      author: author,
+      reviewAuthor: author,
       reviewId: recipeId,
     };
     this

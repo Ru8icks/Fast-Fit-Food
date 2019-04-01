@@ -225,11 +225,13 @@ reviewRoutes.route('/addWorkout').post(function (req, res) {
 });
 reviewRoutes.route('/getWorkout/:id').get(function (req, res) {
   console.log('get',req.params.id);
-  Workout.find({author: req.params.id } ,function (err, workouts){
+  Workout.find({workoutAuthor: req.params.id } ,function (err, workouts){
     if(err){
       console.log(err);
     }
     else {
+      console.log(workouts);
+
       res.json(workouts);
     }
   });
@@ -322,6 +324,8 @@ reviewRoutes.route('/addReminder').post( function(req,res) {
       }
     });
   });
+
+
 
 
 });

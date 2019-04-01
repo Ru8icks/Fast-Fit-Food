@@ -15,7 +15,7 @@ export class WorkoutService {
     const obj = {
       sets: sets,
       programName: name,
-      author: nickname,
+      workoutAuthor: nickname,
       date: new Date(),
     };
     console.log(obj);
