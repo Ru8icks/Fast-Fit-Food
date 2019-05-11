@@ -67,15 +67,14 @@ export class GraphComponent implements OnInit {
     }
   }
 
-  filterPrograms() {
-    const allProg = this.workouts.map(x =>  x.programName);
+  filterPrograms(workouts) {
+    const allProg = workouts.map(x =>  x.programName);
     console.log(allProg)
-    const test = allProg.filter((v, i, a) => a.indexOf(v) === i);
-    console.log(test);
+    return allProg.filter((v, i, a) => a.indexOf(v) === i);
   }
 
-  filteredEx(){
-    let allEx = this.workouts.map(x =>  x.sets);
+  filterEx(workouts) {
+    const allEx = workouts.map(x =>  x.sets);
     console.log(allEx);
     let allExNames = [];
     for (let ex of allEx) {
@@ -84,28 +83,40 @@ export class GraphComponent implements OnInit {
         console.log(x.name);
         allExNames.push(x.name);
       }
-      // let exNames = ex.map(x => x.name)
-      // allExNames.push(exNames)
-      // console.log(ex.valueOf());
     }
     allExNames = allExNames.filter((v, i, a) => a.indexOf(v) === i);
     console.log(allExNames);
+    return allExNames;
 
+  }
+  removeData(chart) {
+    chart.data.labels.pop();
+    chart.data.datasets.forEach((dataset) => {
+      dataset.data.pop();
+    });
+    console.log(chart, 'cunt')
+    chart.update();
   }
 
   test() {
+    this.barChartData = [
+      {data: [], label: 'Pull Ups'},
+
+    ];
     for (const x of this.workouts) {
       console.log(x);
-      if ( true ) {
         for (const set of x.sets) {
+          console.log(set, ' first first')
           if (this.barChartData.find( i => i.label === set.name)) {
-            const data = this.barChartData.find( i => i.label === set.name);
+            const data = this.barChartData.find( i => i.label === set.name );
             console.log(set.valueOf());
-            data.data.push({t: new Date(x.date), y: set.valueOf().set.weight});
+            if (set.max) {
+              console.log('max is here ', set.valueOf().max);
+              data.data.push({t: new Date(x.date), y: set.valueOf().max});
+            }
+            // data.data.push({t: new Date(x.date), y: set.valueOf().set.weight});
           }
         }
-
-      }
     }
     console.log(this.barChartData);
     this.chart.chart.update();

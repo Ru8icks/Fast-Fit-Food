@@ -6,16 +6,20 @@ import { ActivatedRoute } from '@angular/router';
 import {ReminderService} from '../../services/reminder.service';
 
 
+import { Subscription } from 'rxjs/Subscription';
+
+
 @Component({
-  selector: 'app-exercise',
-  templateUrl: './exercise.component.html',
-  styleUrls: ['./exercise.component.css']
+selector: 'app-exercise',
+templateUrl: './exercise.component.html',
+styleUrls: ['./exercise.component.css']
 })
 export class ExerciseComponent implements OnInit {
   programs: Array<Object>;
   profile;
   showModal: boolean;
   program: string;
+  private subscription: Subscription;
 
   constructor(private router: Router,
               private programService: ProgramService,
@@ -25,13 +29,14 @@ export class ExerciseComponent implements OnInit {
   ngOnInit() {
     this.getProfile();
     this.modalService.currentToggle.subscribe(showModal => this.showModal = showModal);
+    this.subscription = this.programService.observableProgram
+      .subscribe(programs => {
+        this.programs = programs;
+      });
   }
 
   getPrograms(nick) {
-    this.programService.getPrograms(nick).subscribe(res => {
-      console.log(res, ' programs');
-      this.programs = Object.values(res);
-    });
+    this.programService.getPrograms(nick);
   }
 
 
@@ -51,8 +56,6 @@ export class ExerciseComponent implements OnInit {
   deleteProgram(id) {
     this.programService.deleteProgram(id);
     console.log(this.programs);
-    // @ts-ignore
-    this.programs = this.programs.filter(program => program._id !== id);
   }
 
   toggleModal = () => {
