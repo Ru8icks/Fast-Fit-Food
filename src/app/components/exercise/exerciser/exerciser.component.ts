@@ -80,13 +80,9 @@ export class ExerciserComponent implements OnInit {
     if (this.weight > this.max) {
       this.max = this.weight;
     }
-    // this.currentSet = this.sets.filter(x => x.name === this.currentEx);
-    this.currentSet = this.exerciseFilter(this.sets, this.currentEx);
+    this.currentSet = this.sets.filter(x => x.name === this.currentEx);
+  }
 
-  }
-  private exerciseFilter(sets, currentEx) {
-    return sets.filter(x => x.name === currentEx);
-  }
 
   nextExercise() {
     console.log(this.currentSet)
@@ -106,8 +102,7 @@ export class ExerciserComponent implements OnInit {
     }
 
     this.currentEx = this.program.pop().name;
-    // this.currentSet = this.sets.filter(x => x.name === this.currentEx);
-    this.currentSet = this.exerciseFilter(this.sets, this.currentEx);
+    this.currentSet = this.sets.filter(x => x.name === this.currentEx);
   }
 
   decReps() {

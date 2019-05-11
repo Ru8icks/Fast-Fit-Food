@@ -89,18 +89,24 @@ export class GraphComponent implements OnInit {
     return allExNames;
 
   }
-  removeData(chart) {
-    chart.data.labels.pop();
-    chart.data.datasets.forEach((dataset) => {
-      dataset.data.pop();
-    });
-    console.log(chart, 'cunt')
-    chart.update();
+  test2() {
+    const unique = (value, index, self) => {
+      return self.indexOf(value) === index;
+    };
+    const setNames = new Array<string>() ;
+    for (const x of this.workouts) {
+      for (const set of x.sets) {
+        setNames.push(set.name);
+      }
+    }
+    const uniqueSetNames = setNames.filter(unique);
+    console.log(uniqueSetNames);
   }
 
   test() {
     this.barChartData = [
       {data: [], label: 'Pull Ups'},
+      {data: [], label: 'Squats'},
 
     ];
     for (const x of this.workouts) {
